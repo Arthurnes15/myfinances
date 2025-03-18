@@ -1,7 +1,10 @@
+import verifyUser from '../../utils/verifyUser';
 import Sidebar from '../../components/Sidebar';
 import './styles.css';
 
-const Bills = () => {
+const Invoices = () => {
+  verifyUser();
+
   return (
     <article>
       <Sidebar />
@@ -12,4 +15,4 @@ const Bills = () => {
   );
 };
 
-export default Bills;
+export default Invoices;

@@ -6,13 +6,20 @@ import {
   BsCreditCard2Front,
   BsPersonCircle,
   BsPiggyBank,
+  BsWallet,
 } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 
+import * as actions from '../../store/modules/auth/actions';
 import logo from '../../assets/images/logo.png';
 import './styles.css';
 
 function Sidebar() {
+  const dispatch = useDispatch();
+  const location = useLocation();
   const [open, setOpen] = useState(true);
   const [classOpen, setClassOpen] = useState('');
 
@@ -24,6 +31,10 @@ function Sidebar() {
   function handleCloseSidebar() {
     setClassOpen('');
     setOpen(true);
+  }
+
+  function handleLogout() {
+    dispatch(actions.loginFailure());
   }
 
   return (
@@ -42,13 +53,31 @@ function Sidebar() {
           </div>
 
           <ul id="side_items">
-            <li className="side-item">
-              <Link to="/bills">
-                <BsCreditCard2Front size={30} />
+            <li
+              className={clsx('side-item', {
+                ' active': location.pathname === '/spendings',
+              })}
+            >
+              <Link to="/spendings">
+                <BsWallet size={30} />
                 <span className="item-description">Gastos</span>
               </Link>
             </li>
-            <li className="side-item">
+            <li
+              className={clsx('side-item', {
+                ' active': location.pathname === '/invoices',
+              })}
+            >
+              <Link to="/invoices">
+                <BsCreditCard2Front size={30} />
+                <span className="item-description">Fatura</span>
+              </Link>
+            </li>
+            <li
+              className={clsx('side-item', {
+                ' active': location.pathname === '/savings',
+              })}
+            >
               <Link to="/savings">
                 <BsPiggyBank size={30} />
                 <span className="item-description">Economias</span>
@@ -72,7 +101,7 @@ function Sidebar() {
         </div>
 
         <div id="logout">
-          <button id="logout_btn">
+          <button id="logout_btn" onClick={handleLogout}>
             <BsBoxArrowRight size={20} />
             <span>Sair</span>
           </button>

@@ -3,11 +3,6 @@
   src: url(../../assets/fonts/SerifDisplay/DMSerifDisplay-Regular.ttf);
 }
 
-body {
-  min-height: 100vh;
-  background-color: #252525;
-}
-
 .header {
   display: flex;
   justify-content: center;
@@ -39,7 +34,7 @@ body {
   position: relative;
   transition: all 0.5s;
   min-width: 93px;
-  z-index: 2;
+  z-index: 1;
 }
 
 #sidebar_content {
@@ -62,7 +57,8 @@ body {
 
 .side-item {
   border: 8px;
-  padding: 14px;
+  margin: 8px 0;
+  padding: 10px;
   cursor: pointer;
 }
 
@@ -105,12 +101,12 @@ body {
 }
 
 #logout_btn {
-  border-top: none;
-  padding: 12px;
-  font-size: 14px;
   display: flex;
   gap: 20px;
   align-items: center;
+  border-top: none;
+  padding: 12px;
+  font-size: 14px;
   border-radius: 8px;
   color: rgb(238, 57, 57);
   border: 1px solid rgb(190, 15, 15);

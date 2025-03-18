@@ -9,5 +9,7 @@
 }
 
 body {
+  min-height: 100vh;
+  background-color: #252525;
   font-family: 'Poppins', sans-serif;
 }
