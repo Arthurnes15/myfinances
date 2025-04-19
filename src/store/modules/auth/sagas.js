@@ -9,14 +9,15 @@ import axiosClient from '../../../config/axios';
 function* loginRequest({ payload }) {
   try {
     const response = yield call(axiosClient.post, '/tokens', payload);
+
     yield put(actions.loginSuccess({ ...response.data }));
 
     toast.success('Você fez login');
 
     axiosClient.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-  } catch (e) {
-    console.error('Error', e.message);
-    toast.error('Usuário ou senha inválidos.');
+  } catch (err) {
+    console.error('Error', err.message);
+    toast.error('E-mail ou senha inválidos.');
 
     yield put(actions.loginFailure());
   }

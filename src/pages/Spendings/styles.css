@@ -1,0 +1,108 @@
+.container-spendings {
+  display: flex;
+  background-color: #252525;
+}
+
+.content-spendings {
+  width: 100vw;
+  margin-left: 100px;
+  padding: 50px 0px 0px 50px;
+}
+
+.header-spendings {
+  display: flex;
+  color: white;
+  padding-bottom: 50px;
+}
+
+.header-spendings > h1 {
+  font-size: 25px;
+  padding-left: 10px;
+}
+
+.header-spendings > .addSpending > button {
+  margin-left: 15px;
+  padding: 0px 5px;
+  background-color: #313131;
+  border: 1px solid white;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+table.spendings {
+  width: 95%;
+  color: white;
+}
+
+table.spendings > thead > tr > th {
+  padding: 15px;
+  background-color: #184C42;
+}
+
+table.spendings > thead > tr > th > span {
+  display: flex;
+  justify-content: center;
+}
+
+table.spendings > thead > tr > th > span > svg {
+  padding-right: 10px;
+}
+
+table.spendings > tbody > tr:nth-child(even) {
+  background-color: #313131;
+}
+
+table.spendings, th, td {
+  text-align: center;
+  padding: 10px 0px;
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+
+.edit-spending {
+  height: 30px;
+  background-color: #4DAFFF;
+  padding: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 2px 1px 1px #3776a1;
+}
+
+.edit-spending:hover {
+  background-color: #1f7bc1;
+  transition: 0.3s;
+}
+
+.delete-spending {
+  height: 30px;
+  background-color: #E75858;
+  padding: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 2px 1px 1px #842e2e;
+}
+
+.delete-spending:hover {
+  background-color: #953c3c;
+  transition: 0.3s;
+}
+
+.necessity[color='Baixa'] {
+  background-color: red;
+  padding: 0 10px;
+  border-radius: 10px;
+}
+
+.necessity[color='Média'] {
+  background-color: #BF920C;
+  padding: 0 10px;
+  border-radius: 10px;
+}
+
+.necessity[color='Extrema'] {
+  background-color: #006C1D;
+  padding: 0 10px;
+  border-radius: 10px;
+}

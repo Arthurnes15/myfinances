@@ -8,7 +8,7 @@ import {
   BsPiggyBank,
   BsWallet,
 } from 'react-icons/bs';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
@@ -20,8 +20,11 @@ import './styles.css';
 function Sidebar() {
   const dispatch = useDispatch();
   const location = useLocation();
+
   const [open, setOpen] = useState(true);
   const [classOpen, setClassOpen] = useState('');
+
+  const user = useSelector((state) => state.auth.user.username);
 
   function handleOpenSidebar() {
     setClassOpen('open-sidebar');
@@ -48,7 +51,7 @@ function Sidebar() {
           <div id="user">
             <BsPersonCircle size={24} />
             <p id="user_infos">
-              <span className="item-description">Arthur</span>
+              <span className="item-description">{user}</span>
             </p>
           </div>
 

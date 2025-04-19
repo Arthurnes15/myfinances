@@ -1,0 +1,67 @@
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.modal_spending-content {
+  position: fixed;
+  width: 400px;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #202020;
+  color: #fff;
+  padding: 32px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+}
+
+.modal_spending-content > .header_modal-spending {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.close_modal-spending {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.text-fieldSpending {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-fieldSpending > input {
+  height: 30px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  padding: 5px;
+  outline: none;
+  border: 1px solid #184C42;
+  border-radius: 4px;
+}
+
+.insertSpending {
+  display: flex;
+  justify-content: center;
+}
+
+.insertSpending > button {
+  width: 15vw;
+  border: none;
+  border-radius: 3px;
+  background-color: #184C42;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 15px;
+  padding: 8px;
+}

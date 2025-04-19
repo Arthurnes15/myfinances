@@ -1,14 +1,14 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { string, object } from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as actions from '../../store/modules/auth/actions';
+import Loading from '../../components/Loading';
 import logo from '../../assets/images/logo.png';
 import './styles.css';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Loading from '../../components/Loading';
 
 function Login() {
   const dispatch = useDispatch();
@@ -61,7 +61,7 @@ function Login() {
             <span className="text-danger">{errors?.email?.message}</span>
           </div>
           <div className="text-fieldLogin">
-            <label htmlFor="email">Senha: </label>
+            <label htmlFor="password">Senha: </label>
             <input
               type="password"
               placeholder="Senha"
