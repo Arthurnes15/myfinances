@@ -10,24 +10,24 @@ import {
   BsXCircle,
 } from 'react-icons/bs';
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { date, number, object, string } from 'yup';
 import { useForm, Controller } from 'react-hook-form';
-import Select from 'react-select';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import { get } from 'lodash';
+import Select from 'react-select';
 import Modal from 'react-modal';
 
 import { dateFormatter } from '../../utils/dataFormatter';
 import * as actions from '../../store/modules/auth/actions';
-import verifyUser from '../../utils/verifyUser';
+import verifyUser from '../../hooks/verifyUser';
 import Sidebar from '../../components/Sidebar';
 import Loading from '../../components/Loading';
 import axiosClient from '../../config/axios';
 import './styles.css';
 import './modal.css';
+import Navbar from '../../components/Navbar';
 
 Modal.setAppElement('#root');
 
@@ -56,14 +56,13 @@ function Spendings() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalEditIsOpen, setEditIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const user = useSelector((state) => state.auth.user.email);
   const necessities = [
     { value: 'Baixa', label: 'Baixa' },
     { value: 'Média', label: 'Média' },
     { value: 'Extrema', label: 'Extrema' },
   ];
-  const user = useSelector((state) => state.auth.user.email);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   let spendingData = useRef();
 
   useEffect(() => {
@@ -85,7 +84,7 @@ function Spendings() {
       }
     }
     getData();
-  }, [navigate, dispatch]);
+  }, [dispatch]);
 
   function openRegisterModal() {
     setIsOpen(true);
@@ -119,7 +118,7 @@ function Spendings() {
       setIsOpen(false);
       document.location.reload();
     } catch (err) {
-      console.err(err);
+      console.error(err);
       setIsLoading(false);
     }
   }
@@ -165,6 +164,7 @@ function Spendings() {
       {/* Register Modal */}
       <Modal
         isOpen={modalIsOpen}
+        closeTimeoutMS={500}
         parentSelector={() => document.querySelector('#root')}
         onRequestClose={closeRegisterModal}
         contentLabel="Modal Insert Spendings"
@@ -199,14 +199,6 @@ function Spendings() {
               <input type="text" placeholder="Valor" {...register('cost')} />
               <span className="text-danger">{errors?.cost?.message}</span>
             </div>
-            {/* <div className="text-fieldSpending">
-              <label htmlFor="date">
-                <BsCalendarWeek size={15} />
-                Data:
-              </label>
-              <input type="date" placeholder="Data" {...register('date')} />
-              <span className="text-danger">{errors?.date?.message}</span>
-            </div> */}
             <div className="text-fieldSpending">
               <label htmlFor="necessity">
                 <BsBookmarkStar />
@@ -217,6 +209,7 @@ function Spendings() {
                 name="necessity"
                 render={({ field: { onChange } }) => (
                   <Select
+                    className="react-select-container"
                     options={necessities}
                     onChange={(e) => {
                       onChange(e.value);
@@ -239,6 +232,7 @@ function Spendings() {
       {/* Edit Modal */}
       <Modal
         isOpen={modalEditIsOpen}
+        closeTimeoutMS={500}
         onRequestClose={closeEditModal}
         contentLabel="Modal Edit Spendings"
         overlayClassName="modal-overlay"
@@ -319,6 +313,7 @@ function Spendings() {
 
       <Loading isLoading={isLoading} />
       <Sidebar />
+      <Navbar />
       <section className="content-spendings">
         <header className="header-spendings">
           <BsWallet size={35} />
@@ -357,8 +352,7 @@ function Spendings() {
                     Necessidade
                   </span>
                 </th>
-                <th></th>
-                <th></th>
+                <th colSpan={2}></th>
               </tr>
             </thead>
             <tbody>
@@ -378,12 +372,12 @@ function Spendings() {
                     </span>
                   </td>
                   <td>
-                    <button type="button" className="edit-spending">
-                      <BsPencilSquare
-                        size={20}
-                        color="white"
-                        onClick={() => openEditModal(spending)}
-                      />
+                    <button
+                      type="button"
+                      className="edit-spending"
+                      onClick={() => openEditModal(spending)}
+                    >
+                      <BsPencilSquare size={20} color="white" />
                     </button>
                   </td>
                   <td>

@@ -29,14 +29,14 @@
   gap: 20px;
 }
 
-.text>h1 {
+.text h1 {
   font-family: 'SerifDisplay';
   font-weight: 400;
   font-size: 35px;
   color: white;
 }
 
-.login_content>form {
+.login_content form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,7 +48,7 @@
   color: #fff;
 }
 
-.text-fieldLogin>input {
+.text-fieldLogin input {
   width: 30vw;
   height: 30px;
   font-size: 14px;
@@ -58,7 +58,7 @@
   border-radius: 4px;
 }
 
-.text-fieldLogin>input:focus {
+.text-fieldLogin input:focus {
   border: 2px solid #184C42;
   box-shadow: 1px 1px 1px 1px #184C42;
 }
@@ -68,7 +68,7 @@
   font-size: 14px;
 }
 
-.loginButton>button {
+.loginButton button {
   width: 10vw;
   border: none;
   border-radius: 3px;
@@ -96,7 +96,7 @@
   }
 }
 
-/* Ipad Size */
+/* Tablet Size */
 @media (max-width: 1024px) and (min-width: 500px) {
   .login_content {
     margin-top: 240px;

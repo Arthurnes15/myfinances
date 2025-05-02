@@ -1,10 +1,8 @@
-.container-spendings {
-  display: flex;
-  background-color: #252525;
+.all-spendings {
+  overflow-x: auto;
 }
 
 .content-spendings {
-  width: 100vw;
   margin-left: 100px;
   padding: 50px 0px 0px 50px;
 }
@@ -15,12 +13,12 @@
   padding-bottom: 50px;
 }
 
-.header-spendings > h1 {
+.header-spendings h1 {
   font-size: 25px;
   padding-left: 10px;
 }
 
-.header-spendings > .addSpending > button {
+.addSpending button {
   margin-left: 15px;
   padding: 0px 5px;
   background-color: #313131;
@@ -105,4 +103,18 @@ table.spendings, th, td {
   background-color: #006C1D;
   padding: 0 10px;
   border-radius: 10px;
+}
+
+/* Desktop size */
+@media (max-width: 960px) {
+  table.spendings, th, td {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 540px) {
+  .content-spendings {
+    margin-left: 0px;
+    padding: 20px;
+  }
 }

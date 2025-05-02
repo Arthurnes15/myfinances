@@ -8,7 +8,7 @@
   z-index: 3;
 }
 
-.modal_spending-content {
+.modal_saving-content {
   position: fixed;
   width: 400px;
   top: 45%;
@@ -21,24 +21,24 @@
   border-radius: 10px;
 }
 
-.modal_spending-content .header_modal-spending {
+.modal_saving-content .header_modal-saving {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.close_modal-spending {
+.close_modal-saving {
   border: none;
   cursor: pointer;
   background-color: transparent;
 }
 
-.text-fieldSpending {
+.text-fieldSaving {
   display: flex;
   flex-direction: column;
 }
 
-.text-fieldSpending input {
+.text-fieldSaving input {
   height: 30px;
   font-size: 14px;
   margin-bottom: 10px;
@@ -48,12 +48,37 @@
   border-radius: 4px;
 }
 
-.insertSpending {
+.form-image {
   display: flex;
   justify-content: center;
 }
 
-.insertSpending button {
+.text-fieldSaving input[type='file'] {
+  display: none;
+}
+
+.selection-image {
+  border: 1px solid #267565;
+  border-radius: 5px;
+  padding: 50px 0;
+  color: #267565;
+}
+
+.selection-image:hover {
+  border: 1px solid #1e574c;
+  transition: 0.5s;
+}
+
+.selection-image > label {
+  padding: 50px 50px;
+}
+
+.insertSaving {
+  display: flex;
+  justify-content: center;
+}
+
+.insertSaving button {
   width: 15vw;
   border: none;
   border-radius: 3px;
@@ -66,17 +91,13 @@
   padding: 8px;
 }
 
-.react-select-container {
-  color: black;
-}
-
 /* Cellphone size */
 @media (max-width: 540px) {
-  .modal_spending-content {
+  .modal_saving-content {
     width: 300px;
   }
 
-  .insertSpending button {
+  .insertSaving button {
     width: 100vw;
   }
 }

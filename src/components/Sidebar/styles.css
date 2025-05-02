@@ -3,7 +3,7 @@
   src: url(../../assets/fonts/SerifDisplay/DMSerifDisplay-Regular.ttf);
 }
 
-.header {
+#sidebar_content .header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@
   gap: 10px;
 }
 
-.header #title {
+#sidebar_content .header #title {
   font-family: 'SerifDisplay';
   font-weight: 300;
   width: 0px;
@@ -31,7 +31,7 @@
   border-right: 1px solid rgba(255, 255, 255, 0.562);
   border-left: 1px solid rgba(255, 255, 255, 0.562);
   color: white;
-  position: absolute;
+  position: fixed;
   transition: all 0.5s;
   min-width: 93px;
   z-index: 1;
@@ -156,4 +156,11 @@
 #sidebar.open-sidebar .header #title {
   width: 150px;
   height: auto;
+}
+
+/* Cellphone Size */
+@media (max-width: 540px) {
+  #sidebar {
+    display: none;
+  }
 }
