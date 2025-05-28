@@ -1,0 +1,38 @@
+.addSpending button {
+  margin-left: 15px;
+  padding: 0px 5px;
+  background-color: #313131;
+  border: 1px solid white;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.edit-spending {
+  height: 30px;
+  background-color: #4DAFFF;
+  padding: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 2px 1px 1px #3776a1;
+}
+
+.edit-spending:hover {
+  background-color: #1f7bc1;
+  transition: 0.3s;
+}
+
+.delete-spending {
+  height: 30px;
+  background-color: #E75858;
+  padding: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 2px 1px 1px #842e2e;
+}
+
+.delete-spending:hover {
+  background-color: #953c3c;
+  transition: 0.3s;
+}

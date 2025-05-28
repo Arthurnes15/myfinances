@@ -1,0 +1,29 @@
+table.spendings {
+  width: 95%;
+  color: white;
+}
+
+table.spendings > thead > tr > th {
+  padding: 15px;
+  background-color: #184C42;
+}
+
+table.spendings > thead > tr > th > span {
+  display: flex;
+  justify-content: center;
+}
+
+table.spendings > thead > tr > th > span > svg {
+  padding-right: 10px;
+}
+
+table.spendings > tbody > tr:nth-child(even) {
+  background-color: #313131;
+}
+
+table.spendings, th, td {
+  text-align: center;
+  padding: 10px 0px;
+  border: 1px solid white;
+  border-collapse: collapse;
+}

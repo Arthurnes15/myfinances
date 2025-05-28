@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import animation from '../../assets/images/loading.gif';
 import verifyUser from '../../hooks/verifyUser';
-import Sidebar from '../../components/Sidebar';
+import Sidebar from '../../components/Common/Sidebar/index';
 import './styles.css';
 
 const Invoices = () => {

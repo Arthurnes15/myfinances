@@ -8,7 +8,7 @@
   z-index: 3;
 }
 
-.modal_spending-content {
+.modal-content {
   position: fixed;
   width: 400px;
   top: 45%;
@@ -21,40 +21,25 @@
   border-radius: 10px;
 }
 
-.modal_spending-content .header_modal-spending {
+.modal-content .header-modal {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.close_modal-spending {
+.close-modal {
   border: none;
   cursor: pointer;
   background-color: transparent;
 }
 
-.text-fieldSpending {
-  display: flex;
-  flex-direction: column;
-}
-
-.text-fieldSpending input {
-  height: 30px;
-  font-size: 14px;
-  margin-bottom: 10px;
-  padding: 5px;
-  outline: none;
-  border: 1px solid #184C42;
-  border-radius: 4px;
-}
-
-.insertSpending {
+.action {
   display: flex;
   justify-content: center;
 }
 
-.insertSpending button {
-  width: 15vw;
+.action button {
+  width: 100%;
   border: none;
   border-radius: 3px;
   background-color: #184C42;
@@ -72,11 +57,7 @@
 
 /* Cellphone size */
 @media (max-width: 540px) {
-  .modal_spending-content {
+  .modal-content {
     width: 300px;
-  }
-
-  .insertSpending button {
-    width: 100vw;
   }
 }

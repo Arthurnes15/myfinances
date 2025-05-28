@@ -1,315 +1,59 @@
-import {
-  BsBookmarkStar,
-  BsCalendarWeek,
-  BsCashCoin,
-  BsPencilSquare,
-  BsPlus,
-  BsTag,
-  BsTrashFill,
-  BsWallet,
-  BsXCircle,
-} from 'react-icons/bs';
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { date, number, object, string } from 'yup';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { toast } from 'react-toastify';
-import { get } from 'lodash';
-import Select from 'react-select';
-import Modal from 'react-modal';
+import { BsPlus, BsWallet } from 'react-icons/bs';
+import { useState } from 'react';
 
-import { dateFormatter } from '../../utils/dataFormatter';
-import * as actions from '../../store/modules/auth/actions';
 import verifyUser from '../../hooks/verifyUser';
-import Sidebar from '../../components/Sidebar';
-import Loading from '../../components/Loading';
-import axiosClient from '../../config/axios';
-import './styles.css';
-import './modal.css';
+import Sidebar from '../../components/Common/Sidebar';
 import Navbar from '../../components/Navbar';
-
-Modal.setAppElement('#root');
+import Button from '../../components/Button';
+import Loading from '../../components/Loading';
+import ModalRegister from '../../components/Modals/RegisterSpending';
+import ModalEdit from '../../components/Modals/EditSpending';
+import Table from '../../components/Table';
+import './styles.css';
 
 function Spendings() {
   verifyUser();
-  const schema = object({
-    item: string().required('Campo obrigatório'),
-    cost: number()
-      .typeError('Deve ser um número')
-      .required('Campo obrigatório'),
-    date: date()
-      .default(() => new Date())
-      .typeError('Data inválida'),
-    necessity: string().required('Campo obrigatório'),
-    user: string().required(),
-  });
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
-  const [spendings, setSpendings] = useState([]);
+
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalEditIsOpen, setEditIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const user = useSelector((state) => state.auth.user.email);
-  const necessities = [
-    { value: 'Baixa', label: 'Baixa' },
-    { value: 'Média', label: 'Média' },
-    { value: 'Extrema', label: 'Extrema' },
-  ];
-  const dispatch = useDispatch();
-  let spendingData = useRef();
-
-  useEffect(() => {
-    async function getData() {
-      try {
-        setIsLoading(true);
-
-        const response = await axiosClient.get('/spendings');
-        setSpendings(response.data);
-
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        const status = get(error, 'response.status', 0);
-        if (status === 401) {
-          dispatch(actions.loginFailure());
-        }
-        console.error(error);
-      }
-    }
-    getData();
-  }, [dispatch]);
-
-  function openRegisterModal() {
-    setIsOpen(true);
-  }
-
-  function closeRegisterModal() {
-    setIsOpen(false);
-  }
+  const [spendingData, setSpendingData] = useState({
+    id: '',
+    item: '',
+    cost: 0,
+    date: '',
+  });
+  const [idSpending, setIdSpending] = useState('');
+  const [necessity, setNecessity] = useState('');
 
   function openEditModal(spending) {
-    spendingData.current = { ...spending };
+    const { _id, item, cost, date, necessity } = spending;
     setEditIsOpen(true);
-  }
-
-  function closeEditModal() {
-    setEditIsOpen(false);
-  }
-
-  async function handleSubmitSpending(data) {
-    setIsLoading(true);
-    try {
-      await axiosClient.post('/spendings', {
-        item: data.item,
-        necessity: data.necessity,
-        date: data.date,
-        cost: data.cost,
-        user: data.user,
-      });
-      toast.success('Gasto salvo com sucesso');
-      setIsLoading(false);
-      setIsOpen(false);
-      document.location.reload();
-    } catch (err) {
-      console.error(err);
-      setIsLoading(false);
-    }
-  }
-
-  async function handleEditSpending(data) {
-    setIsLoading(true);
-    try {
-      await axiosClient.put(`/spendings/${spendingData.current._id}`, {
-        item: data.item,
-        necessity: data.necessity,
-        date: data.date,
-        cost: data.cost,
-        user: data.user,
-      });
-      toast.success('Gasto editado com sucesso');
-      setIsLoading(false);
-      setIsOpen(false);
-      document.location.reload();
-    } catch (err) {
-      console.error(err);
-      setIsLoading(false);
-    }
-  }
-
-  async function handleDelete(e, id, index) {
-    e.persist();
-    try {
-      setIsLoading(true);
-      await axiosClient.delete(`/spendings/${id}`);
-      const newSpendings = [...spendings];
-      newSpendings.splice(index, 1);
-      setSpendings(newSpendings);
-      setIsLoading(false);
-      toast.success('Gasto excluído com sucesso');
-    } catch {
-      console.log('Erro');
-      setIsLoading(false);
-    }
+    setSpendingData({
+      item,
+      cost,
+      date,
+    });
+    setIdSpending(_id);
+    setNecessity(necessity);
   }
 
   return (
     <article className="container-spendings">
-      {/* Register Modal */}
-      <Modal
-        isOpen={modalIsOpen}
-        closeTimeoutMS={500}
-        parentSelector={() => document.querySelector('#root')}
-        onRequestClose={closeRegisterModal}
-        contentLabel="Modal Insert Spendings"
-        overlayClassName="modal-overlay"
-        className="modal_spending-content"
-      >
-        <header className="header_modal-spending">
-          <h1>Adicionar Gasto</h1>
-          <button
-            type="button"
-            onClick={closeRegisterModal}
-            className="close_modal-spending"
-          >
-            <BsXCircle size={40} color="red" />
-          </button>
-        </header>
+      <ModalRegister
+        open={modalIsOpen}
+        close={() => setIsOpen(false)}
+        setIsLoading={setIsLoading}
+      />
 
-        <section>
-          <form onSubmit={handleSubmit(handleSubmitSpending)}>
-            <div className="text-fieldSpending">
-              <label htmlFor="item">
-                <BsTag size={15} />
-                Item:
-              </label>
-              <input type="text" placeholder="Item" {...register('item')} />
-              <span className="text-danger">{errors?.item?.message}</span>
-            </div>
-            <div className="text-fieldSpending">
-              <label htmlFor="cost">
-                <BsCashCoin size={15} /> Valor:
-              </label>
-              <input type="text" placeholder="Valor" {...register('cost')} />
-              <span className="text-danger">{errors?.cost?.message}</span>
-            </div>
-            <div className="text-fieldSpending">
-              <label htmlFor="necessity">
-                <BsBookmarkStar />
-                Grau de Necessidade:
-              </label>
-              <Controller
-                control={control}
-                name="necessity"
-                render={({ field: { onChange } }) => (
-                  <Select
-                    className="react-select-container"
-                    options={necessities}
-                    onChange={(e) => {
-                      onChange(e.value);
-                    }}
-                    placeholder={'Selecione a necessidade'}
-                  />
-                )}
-              />
-              <span className="text-danger">{errors?.necessity?.message}</span>
-            </div>
-            <input type="hidden" defaultValue={user} {...register('user')} />
-
-            <div className="insertSpending">
-              <button type="submit">Cadastrar</button>
-            </div>
-          </form>
-        </section>
-      </Modal>
-
-      {/* Edit Modal */}
-      <Modal
-        isOpen={modalEditIsOpen}
-        closeTimeoutMS={500}
-        onRequestClose={closeEditModal}
-        contentLabel="Modal Edit Spendings"
-        overlayClassName="modal-overlay"
-        className="modal_spending-content"
-      >
-        <header className="header_modal-spending">
-          <h1>Editar Gasto</h1>
-          <button
-            type="button"
-            onClick={closeEditModal}
-            className="close_modal-spending"
-          >
-            <BsXCircle size={40} color="red" />
-          </button>
-        </header>
-
-        <section>
-          <form onSubmit={handleSubmit(handleEditSpending)}>
-            <div className="text-fieldSpending">
-              <label htmlFor="item">
-                <BsTag size={15} />
-                Novo Item:
-              </label>
-              <input
-                type="text"
-                placeholder="Item"
-                defaultValue={spendingData.current?.item}
-                {...register('item')}
-              />
-              <span className="text-danger">{errors?.item?.message}</span>
-            </div>
-            <div className="text-fieldSpending">
-              <label htmlFor="cost">
-                <BsCashCoin size={15} /> Novo Valor:
-              </label>
-              <input
-                type="text"
-                placeholder="Valor"
-                defaultValue={spendingData.current?.cost}
-                {...register('cost')}
-              />
-              <span className="text-danger">{errors?.cost?.message}</span>
-            </div>
-            <div className="text-fieldSpending">
-              <label htmlFor="date">
-                <BsCalendarWeek size={15} />
-                Nova Data:
-              </label>
-              <input
-                type="date"
-                placeholder="Data"
-                defaultValue={dateFormatter(spendingData.current?.date)}
-                {...register('date')}
-              />
-              <span className="text-danger">{errors?.date?.message}</span>
-            </div>
-            <div className="text-fieldSpending">
-              <label htmlFor="necessity">
-                <BsBookmarkStar />
-                Novo Grau de Necessidade:
-              </label>
-              <input
-                type="text"
-                placeholder="Necessidade"
-                defaultValue={spendingData.current?.necessity}
-                {...register('necessity')}
-              />
-              <span className="text-danger">{errors?.necessity?.message}</span>
-            </div>
-            <input type="hidden" defaultValue={user} {...register('user')} />
-
-            <div className="insertSpending">
-              <button type="submit">Editar</button>
-            </div>
-          </form>
-        </section>
-      </Modal>
+      <ModalEdit
+        open={modalEditIsOpen}
+        close={() => setEditIsOpen(false)}
+        setIsLoading={setIsLoading}
+        idSpending={idSpending}
+        spendingData={spendingData}
+        necessity={necessity}
+      />
 
       <Loading isLoading={isLoading} />
       <Sidebar />
@@ -319,80 +63,13 @@ function Spendings() {
           <BsWallet size={35} />
           <h1>Gastos</h1>
           <div className="addSpending">
-            <button type="button" onClick={openRegisterModal}>
+            <Button type="button" onClick={() => setIsOpen(true)}>
               <BsPlus size={30} color="white" />
-            </button>
+            </Button>
           </div>
         </header>
         <main className="all-spendings">
-          <table className="spendings">
-            <thead>
-              <tr>
-                <th>
-                  <span>
-                    <BsTag size={24} />
-                    Item
-                  </span>
-                </th>
-                <th>
-                  <span>
-                    <BsCashCoin size={24} />
-                    Valor
-                  </span>
-                </th>
-                <th>
-                  <span>
-                    <BsCalendarWeek size={24} />
-                    Data
-                  </span>
-                </th>
-                <th>
-                  <span>
-                    <BsBookmarkStar size={24} />
-                    Necessidade
-                  </span>
-                </th>
-                <th colSpan={2}></th>
-              </tr>
-            </thead>
-            <tbody>
-              {spendings.map((spending, index) => (
-                <tr key={spending._id}>
-                  <td>{spending.item}</td>
-                  <td>
-                    {spending.cost.toLocaleString('pt-br', {
-                      style: 'currency',
-                      currency: 'BRL',
-                    })}
-                  </td>
-                  <td>{dateFormatter(spending.date)}</td>
-                  <td>
-                    <span className="necessity" color={spending.necessity}>
-                      {spending.necessity}
-                    </span>
-                  </td>
-                  <td>
-                    <button
-                      type="button"
-                      className="edit-spending"
-                      onClick={() => openEditModal(spending)}
-                    >
-                      <BsPencilSquare size={20} color="white" />
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      type="button"
-                      className="delete-spending"
-                      onClick={(e) => handleDelete(e, spending._id, index)}
-                    >
-                      <BsTrashFill size={20} color="white" />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <Table setIsLoading={setIsLoading} openEditModal={openEditModal} />
         </main>
       </section>
     </article>

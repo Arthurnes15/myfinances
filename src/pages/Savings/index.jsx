@@ -19,7 +19,7 @@ import * as actions from '../../store/modules/auth/actions';
 import verifyUser from '../../hooks/verifyUser';
 import axiosClient from '../../config/axios';
 import Loading from '../../components/Loading';
-import Sidebar from '../../components/Sidebar';
+import Sidebar from '../../components/Common/Sidebar/index';
 import Saving from '../../components/Saving';
 import Navbar from '../../components/Navbar';
 import './styles.css';

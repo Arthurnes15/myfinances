@@ -13,8 +13,8 @@ import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
-import * as actions from '../../store/modules/auth/actions';
-import logo from '../../assets/images/logo.png';
+import * as actions from '../../../store/modules/auth/actions';
+import logo from '../../../assets/images/logo.png';
 import './styles.css';
 
 function Sidebar() {
