@@ -6,7 +6,6 @@ import {
   BsCoin,
   BsImage,
   BsPiggyBank,
-  BsPlus,
   BsTags,
   BsXCircle,
 } from 'react-icons/bs';
@@ -22,6 +21,8 @@ import Loading from '../../components/Loading';
 import Sidebar from '../../components/Common/Sidebar/index';
 import Saving from '../../components/Saving';
 import Navbar from '../../components/Navbar';
+import Header from '../../components/Common/Header';
+import Container from '../../components/Common/Container';
 import './styles.css';
 import './modal.css';
 
@@ -151,6 +152,7 @@ const Savings = () => {
   return (
     <article>
       {/* Register Modal */}
+      {/* TODO: Add modal saving component */}
       <Modal
         isOpen={modalIsOpen}
         closeTimeoutMS={500}
@@ -224,16 +226,12 @@ const Savings = () => {
       <Navbar />
       <Sidebar />
 
-      <section className="content-savings">
-        <header className="header-savings">
-          <BsPiggyBank size={35} />
-          <h1>Economias</h1>
-          <div className="addSaving">
-            <button type="button" onClick={openRegisterModal}>
-              <BsPlus size={30} color="white" />
-            </button>
-          </div>
-        </header>
+      <Container>
+        <Header
+          icon={<BsPiggyBank size={35} />}
+          title="Economias"
+          onClick={openRegisterModal}
+        />
 
         <main className="all-savings">
           {savings.map((saving, index) => (
@@ -248,7 +246,7 @@ const Savings = () => {
             />
           ))}
         </main>
-      </section>
+      </Container>
     </article>
   );
 };

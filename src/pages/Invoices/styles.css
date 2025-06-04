@@ -1,25 +1,5 @@
-.invoices {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-}
-
-.invoices h1 {
-  text-align: center;
-}
-
-.invoices div button {
-  width: 200px;
-  border: none;
-  border-radius: 3px;
-  background-color: #184C42;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 7px;
-  padding: 8px;
+.all-invoices {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 40px;
 }

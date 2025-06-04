@@ -13,11 +13,11 @@ import { useSelector } from 'react-redux';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
 
-import { necessities } from '../../utils/necessities';
-import Modal from '../Common/Modal';
-import axiosClient from '../../config/axios';
-import TextField from '../TextField';
-import Input from '../Common/Input';
+import { necessities } from '../../../utils/necessities';
+import Modal from '../../Common/Modal';
+import axiosClient from '../../../config/axios';
+import TextField from '../../TextField';
+import Input from '../../Common/Input';
 
 function ModalEdit({
   open,
@@ -73,7 +73,7 @@ function ModalEdit({
         user: data.user,
       });
       setIsLoading(false);
-      close;
+      close();
       document.location.reload();
       toast.success('Gasto editado com sucesso');
     } catch (err) {

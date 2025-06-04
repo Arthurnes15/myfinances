@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useEffect, useRef } from 'react';
 import {
   BsTags,
   BsCoin,
@@ -6,21 +7,12 @@ import {
   BsPencilSquare,
   BsTrashFill,
 } from 'react-icons/bs';
+
+import Button from '../Common/Button';
 import './styles.css';
-import { useEffect, useRef } from 'react';
 
 function Saving({ image, name, price, investment, percentage, onClick }) {
-  // const [isLoading, setIsLoading] = useState(false);
   const progressRef = useRef(null);
-
-  // function openEditModal(spending) {
-  //   spendingData.current = { ...spending };
-  //   setEditIsOpen(true);
-  // }
-
-  // function closeEditModal() {
-  //   setEditIsOpen(false);
-  // }
 
   useEffect(() => {
     progressRef.current.setAttribute('style', `width: ${percentage}%`);
@@ -62,12 +54,12 @@ function Saving({ image, name, price, investment, percentage, onClick }) {
                   style={{ width: '30px' }}
                 ></div>
               </div>
-              <button type="button" className="edit-saving">
+              <Button type="button" className="edit">
                 <BsPencilSquare size={20} color="white" />
-              </button>
-              <button type="button" className="delete-saving" onClick={onClick}>
+              </Button>
+              <Button type="button" className="delete" onClick={onClick}>
                 <BsTrashFill size={20} color="white" />
-              </button>
+              </Button>
             </div>
           </div>
         </div>

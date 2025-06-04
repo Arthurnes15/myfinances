@@ -1,0 +1,10 @@
+.header-pages {
+  display: flex;
+  color: white;
+  padding-bottom: 50px;
+}
+
+.header-pages h1 {
+  font-size: 25px;
+  padding-left: 10px;
+}

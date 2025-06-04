@@ -1,3 +1,7 @@
+.all-spendings {
+  overflow-x: auto;
+}
+
 table.spendings {
   width: 95%;
   color: white;

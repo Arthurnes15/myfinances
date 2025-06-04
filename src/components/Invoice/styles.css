@@ -1,0 +1,40 @@
+.invoice {
+  width: 250px;
+  height: 150px;
+  border: 1px solid white;
+  border-radius: 8px;
+  background-color: #313131;
+  color: white;
+  padding: 15px;
+}
+
+.header-invoice {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.status[color="Pendente"]  {
+  height: 40px;
+  border-radius: 20px;
+  background-color: #daa70f;
+}
+
+.status[color="Paga"]  {
+  height: 40px;
+  border-radius: 20px;
+  background-color: #028124;
+}
+
+.invoice-details {
+  height: 30px;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.invoice-details:hover {
+  background-color: #494949;
+  transition: 0.3s;
+}

@@ -1,14 +1,15 @@
-import { BsPlus, BsWallet } from 'react-icons/bs';
+import { BsWallet } from 'react-icons/bs';
 import { useState } from 'react';
 
 import verifyUser from '../../hooks/verifyUser';
 import Sidebar from '../../components/Common/Sidebar';
 import Navbar from '../../components/Navbar';
-import Button from '../../components/Button';
 import Loading from '../../components/Loading';
-import ModalRegister from '../../components/Modals/RegisterSpending';
-import ModalEdit from '../../components/Modals/EditSpending';
-import Table from '../../components/Table';
+import ModalRegister from '../../components/Modals/ModalsSpendings/RegisterSpending';
+import ModalEdit from '../../components/Modals/ModalsSpendings/EditSpending';
+import SpendingsTable from '../../components/SpendingsTable';
+import Header from '../../components/Common/Header';
+import Container from '../../components/Common/Container';
 import './styles.css';
 
 function Spendings() {
@@ -39,7 +40,7 @@ function Spendings() {
   }
 
   return (
-    <article className="container-spendings">
+    <article>
       <ModalRegister
         open={modalIsOpen}
         close={() => setIsOpen(false)}
@@ -58,20 +59,19 @@ function Spendings() {
       <Loading isLoading={isLoading} />
       <Sidebar />
       <Navbar />
-      <section className="content-spendings">
-        <header className="header-spendings">
-          <BsWallet size={35} />
-          <h1>Gastos</h1>
-          <div className="addSpending">
-            <Button type="button" onClick={() => setIsOpen(true)}>
-              <BsPlus size={30} color="white" />
-            </Button>
-          </div>
-        </header>
-        <main className="all-spendings">
-          <Table setIsLoading={setIsLoading} openEditModal={openEditModal} />
-        </main>
-      </section>
+
+      <Container>
+        <Header
+          icon={<BsWallet size={35} />}
+          title="Gastos"
+          onClick={() => setIsOpen(true)}
+        />
+
+        <SpendingsTable
+          setIsLoading={setIsLoading}
+          openEditModal={openEditModal}
+        />
+      </Container>
     </article>
   );
 }

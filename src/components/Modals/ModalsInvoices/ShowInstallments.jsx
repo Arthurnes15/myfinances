@@ -1,0 +1,91 @@
+import PropTypes from 'prop-types';
+import { Controller, useForm } from 'react-hook-form';
+import { boolean, number, object } from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import ModalComponent from '../../Common/Modal';
+import Button from '../../Common/Button';
+import axiosClient from '../../../config/axios';
+import './styles.css';
+
+function ModalInstallments({ open, close, months, setIsLoading, idInvoice }) {
+  const schema = object({
+    index: number(),
+    checked: boolean(),
+  });
+
+  const { control, setValue, handleSubmit } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      index: 0,
+      checked: false,
+    },
+  });
+
+  async function handleEditMonth(data) {
+    setIsLoading(true);
+    try {
+      await axiosClient.put(`invoices/month/${idInvoice}`, {
+        index: data.index,
+        checked: data.checked,
+      });
+      setIsLoading(false);
+      close();
+      document.location.reload();
+    } catch (error) {
+      setIsLoading(false);
+
+      console.log(error);
+    }
+  }
+
+  return (
+    <ModalComponent
+      title="Meses da Fatura"
+      open={open}
+      close={close}
+      className="modal-content"
+      content="Modal Show Installments Months"
+    >
+      <form onSubmit={handleSubmit(handleEditMonth)}>
+        {months?.map((month, index) => (
+          <div key={index} className="months">
+            <label htmlFor="month">{month.month}</label>
+            <Controller
+              control={control}
+              name="checked"
+              render={({ field: { onChange } }) => (
+                <input
+                  type="checkbox"
+                  className="input-checked"
+                  onChange={(e) => onChange(e.target.checked)}
+                  defaultChecked={month.checked}
+                  onClick={() => setValue('index', index)}
+                />
+              )}
+            />
+          </div>
+        ))}
+
+        <section className="change">
+          <div className="deleteInvoice">
+            <Button type="submit">Excluir</Button>
+          </div>
+          <div className="updateInvoice">
+            <Button type="submit">Salvar</Button>
+          </div>
+        </section>
+      </form>
+    </ModalComponent>
+  );
+}
+
+export default ModalInstallments;
+
+ModalInstallments.propTypes = {
+  open: PropTypes.bool,
+  close: PropTypes.func,
+  months: PropTypes.array,
+  setIsLoading: PropTypes.func,
+  idInvoice: PropTypes.string,
+};
