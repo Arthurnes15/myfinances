@@ -1,18 +1,8 @@
-import { number, object, string } from 'yup';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
-import {
-  BsCoin,
-  BsImage,
-  BsPiggyBank,
-  BsTags,
-  BsXCircle,
-} from 'react-icons/bs';
+import { BsPiggyBank } from 'react-icons/bs';
 import { get } from 'lodash';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import Modal from 'react-modal';
 
 import * as actions from '../../store/modules/auth/actions';
 import verifyUser from '../../hooks/verifyUser';
@@ -21,95 +11,22 @@ import Loading from '../../components/Loading';
 import Sidebar from '../../components/Common/Sidebar/index';
 import Saving from '../../components/Saving';
 import Navbar from '../../components/Navbar';
+import ModalRegister from '../../components/Modals/ModalsSavings/RegisterSaving';
 import Header from '../../components/Common/Header';
 import Container from '../../components/Common/Container';
+import fund from '../../assets/images/fund.jpg';
 import './styles.css';
-import './modal.css';
 
 const Savings = () => {
   verifyUser();
-  const schema = object({
-    name: string().required('Campo obrigatório'),
-    price: number()
-      .typeError('Deve ser um número')
-      .required('Campo obrigatório'),
-    investment: number()
-      .typeError('Deve ser um número')
-      .required('Campo obrigatório'),
-    image: string(),
-    user: string(),
-  });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
   const dispatch = useDispatch();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [savings, setSavings] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [photo, setPhoto] = useState('');
-  const user = useSelector((state) => state.auth.user.email);
 
   function openRegisterModal() {
     setIsOpen(true);
-  }
-
-  function closeRegisterModal() {
-    setIsOpen(false);
-  }
-
-  async function handleChange(e) {
-    const file = e.target.files[0];
-    const photoURL = URL.createObjectURL(file);
-    setPhoto(photoURL);
-
-    const formData = new FormData();
-    formData.append('photo', file);
-
-    try {
-      setIsLoading(true);
-      await axiosClient.post('/photos', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      toast.success('Foto enviada com sucesso');
-      setIsLoading(false);
-    } catch (err) {
-      setIsLoading(false);
-      const { status } = get(err, 'response', '');
-      toast.error('Erro ao enviar foto');
-
-      if (status === 401) {
-        dispatch(actions.loginFailure());
-      }
-    }
-  }
-
-  async function handleSubmitSaving(data) {
-    try {
-      setIsLoading(true);
-
-      await axiosClient.post('/savings', {
-        name: data.name,
-        price: data.price,
-        investment: data.investment,
-        image: photo ? photo : '',
-        user: data.user,
-      });
-      toast.success('Salvo com sucesso');
-      setIsLoading(false);
-      setIsOpen(false);
-      document.location.reload();
-    } catch (err) {
-      console.error(err);
-      setIsLoading(false);
-    }
   }
 
   async function handleDelete(e, id, index) {
@@ -151,76 +68,11 @@ const Savings = () => {
 
   return (
     <article>
-      {/* Register Modal */}
-      {/* TODO: Add modal saving component */}
-      <Modal
-        isOpen={modalIsOpen}
-        closeTimeoutMS={500}
-        parentSelector={() => document.querySelector('#root')}
-        onRequestClose={closeRegisterModal}
-        contentLabel="Modal Insert Savings"
-        overlayClassName="modal-overlay"
-        className="modal_saving-content"
-      >
-        <header className="header_modal-saving">
-          <h1>Adicionar Economias</h1>
-          <button
-            type="button"
-            onClick={closeRegisterModal}
-            className="close_modal-saving"
-          >
-            <BsXCircle size={40} color="red" />
-          </button>
-        </header>
-
-        <section>
-          <form onSubmit={handleSubmit(handleSubmitSaving)}>
-            <div className="form-image">
-              <div className="text-fieldSaving">
-                <div className="selection-image">
-                  <label htmlFor="image-file">
-                    <BsImage size={15} />
-                    Imagem
-                  </label>
-                  <input id="image-file" type="file" onChange={handleChange} />
-                </div>
-              </div>
-            </div>
-            <div className="text-fieldSaving">
-              <label htmlFor="price">
-                <BsPiggyBank size={16} />
-                Economia:
-              </label>
-              <input type="text" placeholder="Economia" {...register('name')} />
-              <span className="text-danger">{errors?.name?.message}</span>
-            </div>
-            <div className="text-fieldSaving">
-              <label htmlFor="price">
-                <BsTags size={15} />
-                Preço:
-              </label>
-              <input type="text" placeholder="Preço" {...register('price')} />
-              <span className="text-danger">{errors?.price?.message}</span>
-            </div>
-            <div className="text-fieldSaving">
-              <label htmlFor="investment">
-                <BsCoin size={15} /> Investimento:
-              </label>
-              <input
-                type="text"
-                placeholder="Valor"
-                {...register('investment')}
-              />
-              <span className="text-danger">{errors?.investment?.message}</span>
-            </div>
-            <input type="hidden" defaultValue={user} {...register('user')} />
-
-            <div className="insertSaving">
-              <button type="submit">Cadastrar</button>
-            </div>
-          </form>
-        </section>
-      </Modal>
+      <ModalRegister
+        open={modalIsOpen}
+        close={() => setIsOpen(false)}
+        setIsLoading={setIsLoading}
+      />
 
       <Loading isLoading={isLoading} />
       <Navbar />
@@ -237,7 +89,7 @@ const Savings = () => {
           {savings.map((saving, index) => (
             <Saving
               key={saving._id}
-              image={saving.image}
+              image={saving.image || fund}
               name={saving.name}
               price={saving.price}
               investment={saving.investment}

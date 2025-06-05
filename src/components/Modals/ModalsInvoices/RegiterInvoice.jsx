@@ -1,34 +1,29 @@
-import { date, number, object, string } from 'yup';
-import { Controller, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { BsBookmarkStar, BsCashCoin, BsTag } from 'react-icons/bs';
-import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
-import Select from 'react-select';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useSelector } from 'react-redux';
+import { date, number, object, string } from 'yup';
 
-import { necessities } from '../../../utils/necessities';
-import axiosClient from '../../../config/axios';
-import Modal from '../../Common/Modal';
-import Input from '../../Common/Input';
+import ModalComponent from '../../Common/Modal';
 import TextField from '../../TextField';
+import { BsCalendar2, BsCashCoin, BsListOl, BsTag } from 'react-icons/bs';
+import Input from '../../Common/Input';
+import axiosClient from '../../../config/axios';
+import { toast } from 'react-toastify';
 
 function ModalRegister({ open, close, setIsLoading }) {
   const user = useSelector((state) => state.auth.user.email);
 
   const schema = object({
     item: string().required('Campo obrigatório'),
-    cost: number()
+    total: number()
       .typeError('Deve ser um número')
       .required('Campo obrigatório'),
-    date: date()
-      .default(() => new Date())
-      .typeError('Data inválida'),
-    necessity: string().required('Campo obrigatório'),
+    installments: string().required('Campo obrigatório'),
+    date: date().typeError('Não é uma data'),
   });
 
   const {
-    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -36,37 +31,37 @@ function ModalRegister({ open, close, setIsLoading }) {
     resolver: yupResolver(schema),
   });
 
-  async function handleSubmitSpending(data) {
+  async function handleSubmitInvoice(data) {
     setIsLoading(true);
     try {
-      await axiosClient.post('spendings', {
+      await axiosClient.post('invoices', {
         item: data.item,
-        necessity: data.necessity,
-        date: data.date,
-        cost: data.cost,
+        total: data.total,
+        installmentsNumber: data.installments,
+        date: new Date(data.date).toISOString(),
         user,
       });
       setIsLoading(false);
-      close;
+      close();
       document.location.reload();
-      toast.success('Gasto salvo com sucesso');
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
       setIsLoading(false);
-      toast.error('Erro ao salvar gasto');
+      toast.error('Erro ao cadastrar item');
     }
   }
+
   if (open) {
     return (
-      <Modal
-        title="Cadastrar Gasto"
+      <ModalComponent
+        title="Cadastrar Item"
         open={open}
         close={close}
         className="modal-content"
-        content="Modal Insert Spendings"
+        content="Modal Insert Invoices Items"
       >
         <section>
-          <form onSubmit={handleSubmit(handleSubmitSpending)}>
+          <form onSubmit={handleSubmit(handleSubmitInvoice)}>
             <TextField errors={errors?.item?.message}>
               <label htmlFor="item">
                 <BsTag size={15} />
@@ -74,48 +69,49 @@ function ModalRegister({ open, close, setIsLoading }) {
               </label>
               <Input
                 type="text"
-                placeholder="Item"
+                placeholder="Nome"
                 register={register('item')}
               />
             </TextField>
             <TextField errors={errors?.item?.message}>
               <label htmlFor="item">
                 <BsCashCoin size={15} />
-                Valor:
+                Preço:
               </label>
               <Input
                 type="text"
                 placeholder="Valor"
-                register={register('cost')}
+                register={register('total')}
               />
             </TextField>
             <TextField errors={errors?.item?.message}>
               <label htmlFor="item">
-                <BsBookmarkStar size={15} />
-                Grau de Necessidade:
+                <BsListOl size={15} />
+                Número de Parcelas:
               </label>
-              <Controller
-                control={control}
-                name="necessity"
-                render={({ field: { onChange } }) => (
-                  <Select
-                    className="react-select-container"
-                    options={necessities}
-                    onChange={(e) => {
-                      onChange(e.value);
-                    }}
-                    placeholder="Selecione a necessidade"
-                  />
-                )}
+              <Input
+                type="number"
+                placeholder="Parcelas"
+                register={register('installments')}
               />
             </TextField>
-
+            <TextField errors={errors?.item?.message}>
+              <label htmlFor="item">
+                <BsCalendar2 size={15} />
+                Data da Compra
+              </label>
+              <Input
+                type="date"
+                placeholder="Data"
+                register={register('date')}
+              />
+            </TextField>
             <div className="action">
               <button type="submit">Cadastrar</button>
             </div>
           </form>
         </section>
-      </Modal>
+      </ModalComponent>
     );
   } else {
     return <></>;

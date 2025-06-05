@@ -39,6 +39,21 @@ function ModalInstallments({ open, close, months, setIsLoading, idInvoice }) {
     }
   }
 
+  async function handleDelete(e) {
+    e.persist();
+    try {
+      setIsLoading(true);
+
+      await axiosClient.delete(`invoices/${idInvoice}`);
+
+      setIsLoading(false);
+      document.location.reload();
+    } catch (error) {
+      setIsLoading(false);
+      console.error(error);
+    }
+  }
+
   return (
     <ModalComponent
       title="Meses da Fatura"
@@ -68,8 +83,8 @@ function ModalInstallments({ open, close, months, setIsLoading, idInvoice }) {
         ))}
 
         <section className="change">
-          <div className="deleteInvoice">
-            <Button type="submit">Excluir</Button>
+          <div className="deleteInvoice" onClick={(e) => handleDelete(e)}>
+            <Button type="button">Excluir</Button>
           </div>
           <div className="updateInvoice">
             <Button type="submit">Salvar</Button>
@@ -88,4 +103,5 @@ ModalInstallments.propTypes = {
   months: PropTypes.array,
   setIsLoading: PropTypes.func,
   idInvoice: PropTypes.string,
+  handleDelete: PropTypes.func,
 };

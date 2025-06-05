@@ -14,13 +14,13 @@
   margin-bottom: 20px;
 }
 
-.status[color="Pendente"]  {
+.status[color='Pendente'] {
   height: 40px;
   border-radius: 20px;
   background-color: #daa70f;
 }
 
-.status[color="Paga"]  {
+.status[color='Paga'] {
   height: 40px;
   border-radius: 20px;
   background-color: #028124;
@@ -37,4 +37,11 @@
 .invoice-details:hover {
   background-color: #494949;
   transition: 0.3s;
+}
+
+/* Desktop Size */
+@media (max-width: 1560px) {
+  .invoice {
+    margin-bottom: 50px;
+  }
 }

@@ -10,7 +10,6 @@ import ModalEdit from '../../components/Modals/ModalsSpendings/EditSpending';
 import SpendingsTable from '../../components/SpendingsTable';
 import Header from '../../components/Common/Header';
 import Container from '../../components/Common/Container';
-import './styles.css';
 
 function Spendings() {
   verifyUser();

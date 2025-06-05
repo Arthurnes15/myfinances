@@ -3,11 +3,13 @@ import { BsCreditCard2Front } from 'react-icons/bs';
 
 import verifyUser from '../../hooks/verifyUser';
 import Sidebar from '../../components/Common/Sidebar/index';
+import Navbar from '../../components/Navbar/index';
 import Header from '../../components/Common/Header';
 import Loading from '../../components/Loading';
 import axiosClient from '../../config/axios';
 import Invoice from '../../components/Invoice';
 import ModalInstallments from '../../components/Modals/ModalsInvoices/ShowInstallments';
+import ModalRegister from '../../components/Modals/ModalsInvoices/RegiterInvoice';
 import Container from '../../components/Common/Container';
 import './styles.css';
 
@@ -17,7 +19,8 @@ const Invoices = () => {
   const [invoices, setInvoices] = useState([]);
   const [invoicesData, setInvoicesData] = useState([]);
   const [idInvoice, setIdInvoice] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+  const [isInstallmentsOpen, setIsInstallmentsOpen] = useState(false);
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
   useEffect(() => {
     async function getData() {
@@ -39,7 +42,7 @@ const Invoices = () => {
   }, []);
 
   function openInvoice(invoice) {
-    setIsOpen(true);
+    setIsInstallmentsOpen(true);
     setInvoicesData(invoice);
     setIdInvoice(invoice._id);
   }
@@ -48,18 +51,29 @@ const Invoices = () => {
 
   return (
     <article>
+      <ModalRegister
+        open={isRegisterOpen}
+        close={() => setIsRegisterOpen(false)}
+        setIsLoading={setIsLoading}
+      />
       <ModalInstallments
-        open={isOpen}
-        close={() => setIsOpen(false)}
+        open={isInstallmentsOpen}
+        close={() => setIsInstallmentsOpen(false)}
         setIsLoading={setIsLoading}
         months={months}
         idInvoice={idInvoice}
       />
+
       <Loading isLoading={isLoading} />
       <Sidebar />
+      <Navbar />
 
       <Container>
-        <Header icon={<BsCreditCard2Front size={35} />} title="Fatura" />
+        <Header
+          icon={<BsCreditCard2Front size={35} />}
+          title="Fatura"
+          onClick={() => setIsRegisterOpen(true)}
+        />
 
         <main className="all-invoices">
           {invoices.map((invoice, index) => (
