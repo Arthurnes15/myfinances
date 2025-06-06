@@ -1,0 +1,30 @@
+@font-face {
+  font-family: 'SerifDisplay';
+  src: url(../../../assets/fonts/SerifDisplay/DMSerifDisplay-Regular.ttf);
+}
+
+.header-mobile {
+  display: none;
+}
+
+.header-mobile img {
+  width: 50px;
+  height: auto;
+}
+
+.header-mobile h1 {
+  font-size: 7vw;
+  font-family: 'SerifDisplay';
+  font-weight: 100;
+  color: white;
+}
+
+/* Cellphone Size */
+@media (max-width: 540px) {
+  .header-mobile {
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+    gap: 10px;
+  }
+}

@@ -1,7 +1,7 @@
 .saving {
   width: 350px;
   color: white;
-  background-color: #1E1E1E;
+  background-color: #1e1e1e;
   border-radius: 8px;
 }
 
@@ -35,45 +35,25 @@
   width: 200px;
   height: 15px;
   margin-right: 25px;
-  border-radius: 15px;
-  color: green;
+  padding: 0 0 4px 0;
+  border-radius: 20px;
   background-color: white;
 }
 
 .progress-bar .progress {
   width: 100px;
   height: 100%;
-  border-radius: 15px;
-  background-color: green;
+  padding: 4px 0 0 0;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  background-color: #23695b;
 }
 
-.edit-saving {
-  height: 30px;
-  background-color: #4DAFFF;
-  padding: 5px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0px 2px 1px 1px #3776a1;
+.progress .bubble {
+  display: flex;
+  width: 90%;
+  height: 3px;
+  background-color: #3cb49c48;
+  border-radius: 40px;
+  margin: 0px 2px 0 4px;
 }
-
-.edit-saving:hover {
-  background-color: #1f7bc1;
-  transition: 0.3s;
-}
-
-.delete-saving {
-  height: 30px;
-  background-color: #E75858;
-  padding: 5px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0px 2px 1px 1px #842e2e;
-}
-
-.delete-saving:hover {
-  background-color: #953c3c;
-  transition: 0.3s;
-}
-

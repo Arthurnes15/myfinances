@@ -3,7 +3,7 @@ import { BsCreditCard2Front } from 'react-icons/bs';
 
 import verifyUser from '../../hooks/verifyUser';
 import Sidebar from '../../components/Common/Sidebar/index';
-import Navbar from '../../components/Navbar/index';
+import Navbar from '../../components/Common/Navbar';
 import Header from '../../components/Common/Header';
 import Loading from '../../components/Loading';
 import axiosClient from '../../config/axios';
@@ -12,6 +12,7 @@ import ModalInstallments from '../../components/Modals/ModalsInvoices/ShowInstal
 import ModalRegister from '../../components/Modals/ModalsInvoices/RegiterInvoice';
 import Container from '../../components/Common/Container';
 import './styles.css';
+import HeaderMobile from '../../components/Common/HeaderMobile';
 
 const Invoices = () => {
   verifyUser();
@@ -66,6 +67,7 @@ const Invoices = () => {
 
       <Loading isLoading={isLoading} />
       <Sidebar />
+      <HeaderMobile />
       <Navbar />
 
       <Container>

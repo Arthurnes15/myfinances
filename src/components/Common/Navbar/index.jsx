@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import {
-  BsBoxArrowRight,
   BsCreditCard2Front,
   BsPersonCircle,
   BsPiggyBank,
@@ -8,30 +7,12 @@ import {
 } from 'react-icons/bs';
 import clsx from 'clsx';
 
-import * as actions from '../../store/modules/auth/actions';
-import logo from '../../assets/images/logo.png';
 import './styles.css';
-import { useDispatch, useSelector } from 'react-redux';
 
 function Navbar() {
-  const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.auth.user.username);
-
-  function handleLogout() {
-    dispatch(actions.loginFailure());
-  }
-
   return (
     <nav id="navbar">
       <div id="navbar-content">
-        <div className="header">
-          <img src={logo} alt="" />
-          <p className="user">
-            <BsPersonCircle size={24} />
-            {user}
-          </p>
-        </div>
         <ul id="nav-items">
           <li
             className={clsx('nav-item', {
@@ -39,7 +20,8 @@ function Navbar() {
             })}
           >
             <Link to="/spendings">
-              <BsWallet size={30} />
+              <BsWallet size={25} />
+              Gastos
             </Link>
           </li>
           <li
@@ -48,7 +30,8 @@ function Navbar() {
             })}
           >
             <Link to="/invoices">
-              <BsCreditCard2Front size={30} />
+              <BsCreditCard2Front size={25} />
+              Fatura
             </Link>
           </li>
           <li
@@ -57,13 +40,20 @@ function Navbar() {
             })}
           >
             <Link to="/savings">
-              <BsPiggyBank size={30} />
+              <BsPiggyBank size={25} />
+              Economias
             </Link>
           </li>
-
-          <button id="logout_btn" onClick={handleLogout}>
-            <BsBoxArrowRight size={20} />
-          </button>
+          <li
+            className={clsx('nav-item', {
+              ' active': location.pathname === '/user',
+            })}
+          >
+            <Link to="/user">
+              <BsPersonCircle size={25} />
+              Conta
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

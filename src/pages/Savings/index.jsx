@@ -10,9 +10,10 @@ import axiosClient from '../../config/axios';
 import Loading from '../../components/Loading';
 import Sidebar from '../../components/Common/Sidebar/index';
 import Saving from '../../components/Saving';
-import Navbar from '../../components/Navbar';
+import Navbar from '../../components/Common/Navbar';
 import ModalRegister from '../../components/Modals/ModalsSavings/RegisterSaving';
 import Header from '../../components/Common/Header';
+import HeaderMobile from '../../components/Common/HeaderMobile';
 import Container from '../../components/Common/Container';
 import fund from '../../assets/images/fund.jpg';
 import './styles.css';
@@ -75,6 +76,7 @@ const Savings = () => {
       />
 
       <Loading isLoading={isLoading} />
+      <HeaderMobile />
       <Navbar />
       <Sidebar />
 

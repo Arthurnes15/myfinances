@@ -48,11 +48,9 @@ function Saving({ image, name, price, investment, percentage, onClick }) {
             </p>
             <div className="progress-actions">
               <div className="progress-bar">
-                <div
-                  ref={progressRef}
-                  className="progress"
-                  style={{ width: '30px' }}
-                ></div>
+                <div ref={progressRef} className="progress">
+                  <div className="bubble"></div>
+                </div>
               </div>
               <Button type="button" className="edit">
                 <BsPencilSquare size={20} color="white" />
@@ -69,15 +67,6 @@ function Saving({ image, name, price, investment, percentage, onClick }) {
 }
 
 export default Saving;
-
-Saving.defaultProps = {
-  image: '',
-  name: '',
-  price: 0,
-  investment: 0,
-  percentage: 0,
-  onClick: '',
-};
 
 Saving.propTypes = {
   image: PropTypes.string,

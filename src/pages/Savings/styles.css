@@ -10,6 +10,7 @@
   .all-savings {
     grid-template-columns: 1fr;
     gap: 50px;
+    margin-bottom: 50px;
   }
 
   .content-savings {
