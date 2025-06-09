@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -11,7 +12,6 @@ import {
 } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import Select from 'react-select';
-import PropTypes from 'prop-types';
 
 import { necessities } from '../../../utils/necessities';
 import Modal from '../../Common/Modal';
@@ -42,7 +42,6 @@ function ModalEdit({
       .default(() => new Date())
       .typeError('Data inválida'),
     necessity: string().required('Campo obrigatório'),
-    user: string().required(),
   });
 
   const {
@@ -70,7 +69,7 @@ function ModalEdit({
         necessity: data.necessity,
         date: data.date,
         cost: data.cost,
-        user: data.user,
+        user,
       });
       setIsLoading(false);
       close();
@@ -97,11 +96,7 @@ function ModalEdit({
               <BsTag size={15} />
               Novo Item:
             </label>
-            <Input
-              type="text"
-              placeholder="Item"
-              register={register('item')}
-            ></Input>
+            <Input type="text" placeholder="Item" register={register('item')} />
           </TextField>
           <TextField>
             <label htmlFor="cost">
@@ -112,18 +107,14 @@ function ModalEdit({
               type="text"
               placeholder="Valor"
               register={register('cost')}
-            ></Input>
+            />
           </TextField>
           <TextField>
             <label htmlFor="date">
               <BsCalendarWeek size={15} />
               Nova Data:
             </label>
-            <Input
-              type="date"
-              placeholder="Item"
-              register={register('date')}
-            ></Input>
+            <Input type="date" placeholder="Item" register={register('date')} />
           </TextField>
           <TextField errors={errors?.item?.message}>
             <label htmlFor="item">
@@ -146,12 +137,6 @@ function ModalEdit({
               )}
             />
           </TextField>
-
-          <Input
-            type="hidden"
-            defaultValue={user}
-            register={register('user')}
-          />
 
           <div className="action">
             <button type="submit">Editar</button>

@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
-import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { number, object, string } from 'yup';
+import { useEffect } from 'react';
 import { BsCoin, BsPiggyBank, BsTags } from 'react-icons/bs';
+import { object, number, string } from 'yup';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { toast } from 'react-toastify';
 
 import Input from '../../Common/Input';
-import TextField from '../../TextField';
 import Modal from '../../Common/Modal';
+import TextField from '../../TextField';
 import axiosClient from '../../../config/axios';
 
-function ModalRegister({ open, close, setIsLoading }) {
-  const user = useSelector((state) => state.auth.user.email);
+function ModalEdit({ open, close, setIsLoading, savingData, idSaving }) {
   const schema = object({
     name: string().required('Campo obrigatório'),
     price: number()
@@ -20,52 +20,56 @@ function ModalRegister({ open, close, setIsLoading }) {
     investment: number()
       .typeError('Deve ser um número')
       .required('Campo obrigatório'),
-    image: string(),
   });
 
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  async function handleSubmitSaving(data) {
-    try {
-      setIsLoading(true);
+  useEffect(() => {
+    const { name, price, investment } = savingData;
+    setValue('name', name);
+    setValue('price', price);
+    setValue('investment', investment);
+  }, [setValue, savingData]);
 
-      await axiosClient.post('savings', {
+  async function handleEditSaving(data) {
+    setIsLoading(true);
+    try {
+      await axiosClient.put(`savings/${idSaving}`, {
         name: data.name,
         price: data.price,
         investment: data.investment,
-        image: '',
-        user,
       });
       setIsLoading(false);
-      close();
       document.location.reload();
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
       setIsLoading(false);
+      console.error(error);
+      toast.error('Erro ao editar economia');
     }
   }
 
   if (open) {
     return (
       <Modal
-        title="Cadastrar Economia"
+        title="Editar Economia"
         open={open}
         close={close}
         className="modal-content"
-        content="Modal Insert Savings"
+        content="Modal Edit Savings"
       >
         <section>
-          <form onSubmit={handleSubmit(handleSubmitSaving)}>
+          <form onSubmit={handleSubmit(handleEditSaving)}>
             <TextField errors={errors?.name?.message}>
               <label htmlFor="saving">
                 <BsPiggyBank size={16} />
-                Economia:
+                Nova Economia:
               </label>
               <Input
                 type="text"
@@ -77,7 +81,7 @@ function ModalRegister({ open, close, setIsLoading }) {
             <TextField errors={errors?.price?.message}>
               <label htmlFor="price">
                 <BsTags size={15} />
-                Preço:
+                Novo Preço:
               </label>
               <Input
                 type="text"
@@ -89,7 +93,7 @@ function ModalRegister({ open, close, setIsLoading }) {
             <TextField errors={errors?.investment?.message}>
               <label htmlFor="investment">
                 <BsCoin size={15} />
-                Investimento:
+                Novo Valor do Investimento:
               </label>
               <Input
                 type="text"
@@ -99,7 +103,7 @@ function ModalRegister({ open, close, setIsLoading }) {
             </TextField>
 
             <div className="action">
-              <button type="submit">Cadastrar</button>
+              <button type="submit">Editar</button>
             </div>
           </form>
         </section>
@@ -110,10 +114,12 @@ function ModalRegister({ open, close, setIsLoading }) {
   }
 }
 
-export default ModalRegister;
+export default ModalEdit;
 
-ModalRegister.propTypes = {
+ModalEdit.propTypes = {
   open: PropTypes.bool,
   close: PropTypes.func,
   setIsLoading: PropTypes.func,
+  savingData: PropTypes.object,
+  idSaving: PropTypes.string,
 };

@@ -12,6 +12,7 @@ import Sidebar from '../../components/Common/Sidebar/index';
 import Saving from '../../components/Saving';
 import Navbar from '../../components/Common/Navbar';
 import ModalRegister from '../../components/Modals/ModalsSavings/RegisterSaving';
+import ModalEdit from '../../components/Modals/ModalsSavings/EditSaving';
 import Header from '../../components/Common/Header';
 import HeaderMobile from '../../components/Common/HeaderMobile';
 import Container from '../../components/Common/Container';
@@ -23,7 +24,14 @@ const Savings = () => {
 
   const dispatch = useDispatch();
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalEditIsOpen, setEditIsOpen] = useState(false);
   const [savings, setSavings] = useState([]);
+  const [savingData, setSavingData] = useState({
+    name: '',
+    price: 0,
+    investment: 0,
+  });
+  const [idSaving, setIdSaving] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   function openRegisterModal() {
@@ -67,12 +75,31 @@ const Savings = () => {
     getData();
   }, [dispatch]);
 
+  function openEditModal(saving) {
+    const { _id, name, price, investment } = saving;
+    setEditIsOpen(true);
+    setSavingData({
+      name,
+      price,
+      investment,
+    });
+    setIdSaving(_id);
+  }
+
   return (
     <article>
       <ModalRegister
         open={modalIsOpen}
         close={() => setIsOpen(false)}
         setIsLoading={setIsLoading}
+      />
+
+      <ModalEdit
+        open={modalEditIsOpen}
+        close={() => setEditIsOpen(false)}
+        setIsLoading={setIsLoading}
+        savingData={savingData}
+        idSaving={idSaving}
       />
 
       <Loading isLoading={isLoading} />
@@ -96,7 +123,8 @@ const Savings = () => {
               price={saving.price}
               investment={saving.investment}
               percentage={saving.percentage}
-              onClick={(e) => handleDelete(e, saving._id, index)}
+              onEdit={() => openEditModal(saving)}
+              onDelete={(e) => handleDelete(e, saving._id, index)}
             />
           ))}
         </main>

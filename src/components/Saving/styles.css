@@ -49,10 +49,27 @@
   background-color: #23695b;
 }
 
+.progress-bar .fullProgress {
+  width: 100px;
+  height: 100%;
+  padding: 4px 0 0 0;
+  border-radius: 15px;
+  background-color: #23695b;
+}
+
 .progress .bubble {
   display: flex;
   width: 90%;
-  height: 3px;
+  height: 5px;
+  background-color: #3cb49c48;
+  border-radius: 40px;
+  margin: 0px 2px 0 4px;
+}
+
+.fullProgress .bubble {
+  display: flex;
+  width: 90%;
+  height: 5px;
   background-color: #3cb49c48;
   border-radius: 40px;
   margin: 0px 2px 0 4px;

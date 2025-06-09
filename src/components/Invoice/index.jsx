@@ -4,6 +4,8 @@ import { BsCheckCircle, BsClockHistory, BsList } from 'react-icons/bs';
 import './styles.css';
 
 function Invoice({ item, status, installmentsValue, onClick }) {
+  // TODO: Fallback
+
   return (
     <section className="invoice">
       <div className="header-invoice">

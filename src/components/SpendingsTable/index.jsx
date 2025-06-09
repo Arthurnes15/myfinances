@@ -58,6 +58,7 @@ function SpendingsTable({ setIsLoading, openEditModal }) {
       setIsLoading(false);
     }
   }
+  // TODO: Fallback
 
   return (
     <main className="all-spendings">
