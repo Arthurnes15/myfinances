@@ -8,7 +8,14 @@ import Button from '../../Common/Button';
 import axiosClient from '../../../config/axios';
 import './styles.css';
 
-function ModalInstallments({ open, close, months, setIsLoading, idInvoice }) {
+function ModalInstallments({
+  open,
+  close,
+  months,
+  restToPay,
+  setIsLoading,
+  idInvoice,
+}) {
   const schema = object({
     index: number(),
     checked: boolean(),
@@ -59,6 +66,7 @@ function ModalInstallments({ open, close, months, setIsLoading, idInvoice }) {
       title="Meses da Fatura"
       open={open}
       close={close}
+      id="notEnough"
       className="modal-content"
       content="Modal Show Installments Months"
     >
@@ -82,6 +90,15 @@ function ModalInstallments({ open, close, months, setIsLoading, idInvoice }) {
           </div>
         ))}
 
+        <div className="restToPay">
+          Total a pagar:
+          {' ' +
+            restToPay?.toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
+        </div>
+
         <section className="change">
           <div className="deleteInvoice" onClick={(e) => handleDelete(e)}>
             <Button type="button">Excluir</Button>
@@ -101,6 +118,7 @@ ModalInstallments.propTypes = {
   open: PropTypes.bool,
   close: PropTypes.func,
   months: PropTypes.array,
+  restToPay: PropTypes.number,
   setIsLoading: PropTypes.func,
   idInvoice: PropTypes.string,
   handleDelete: PropTypes.func,

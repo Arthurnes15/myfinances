@@ -19,19 +19,12 @@ import axiosClient from '../../../config/axios';
 import TextField from '../../TextField';
 import Input from '../../Common/Input';
 
-function ModalEdit({
-  open,
-  close,
-  setIsLoading,
-  idSpending,
-  spendingData,
-  necessity,
-}) {
-  const user = useSelector((state) => state.auth.user.email);
-
+function ModalEdit({ open, close, setIsLoading, idSpending, spendingData }) {
+  const { item, cost, dateSpending, necessity } = spendingData;
   const indexNecessity = necessities.findIndex(
     (value) => value.value === necessity
   );
+  const user = useSelector((state) => state.auth.user.email);
 
   const schema = object({
     item: string().required('Campo obrigatório'),
@@ -55,11 +48,11 @@ function ModalEdit({
   });
 
   useEffect(() => {
-    const { item, cost, dateSpending } = spendingData;
     setValue('item', item);
     setValue('cost', cost);
     setValue('date', dateSpending);
-  }, [setValue, spendingData]);
+    setValue('necessity', necessity);
+  }, [setValue, cost, dateSpending, item, necessity]);
 
   async function handleEditSpending(data) {
     setIsLoading(true);
@@ -114,7 +107,11 @@ function ModalEdit({
               <BsCalendarWeek size={15} />
               Nova Data:
             </label>
-            <Input type="date" placeholder="Item" register={register('date')} />
+            <Input
+              type="date"
+              style={{ width: '97%' }}
+              register={register('date')}
+            />
           </TextField>
           <TextField errors={errors?.item?.message}>
             <label htmlFor="item">
@@ -124,6 +121,7 @@ function ModalEdit({
             <Controller
               control={control}
               name="necessity"
+              defaultValue={necessities[indexNecessity]}
               render={({ field: { onChange } }) => (
                 <Select
                   className="react-select-container"
@@ -155,5 +153,4 @@ ModalEdit.propTypes = {
   setIsLoading: PropTypes.func,
   idSpending: PropTypes.string,
   spendingData: PropTypes.object,
-  necessity: PropTypes.string,
 };

@@ -6,7 +6,7 @@
 
 .months label {
   text-transform: capitalize;
-  font-size: 20px;
+  font-size: 18px;
   padding-bottom: 10px;
   text-transform: capitalize;
 }
@@ -15,10 +15,16 @@
   width: 20px;
 }
 
+.restToPay {
+  display: flex;
+  font-size: 18px;
+  margin: 10px 20px 0 20px;
+}
+
 .change {
   display: flex;
   justify-content: space-around;
-  padding-top: 10px;
+  padding-top: 15px;
 }
 
 .deleteInvoice button {

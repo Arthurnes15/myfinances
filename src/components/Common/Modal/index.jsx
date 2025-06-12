@@ -6,10 +6,19 @@ import './styles.css';
 
 Modal.setAppElement('#root');
 
-function ModalComponent({ className, open, close, content, title, children }) {
+function ModalComponent({
+  id,
+  className,
+  open,
+  close,
+  content,
+  title,
+  children,
+}) {
   if (open) {
     return (
       <Modal
+        id={id}
         className={className}
         isOpen={open}
         parentSelector={() => document.querySelector('#root')}
@@ -36,6 +45,7 @@ export default ModalComponent;
 
 ModalComponent.propTypes = {
   children: PropTypes.node,
+  id: PropTypes.string,
   className: PropTypes.string,
   open: PropTypes.func,
   close: PropTypes.func,

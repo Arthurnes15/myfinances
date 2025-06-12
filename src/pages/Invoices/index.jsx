@@ -48,7 +48,7 @@ const Invoices = () => {
     setIdInvoice(invoice._id);
   }
 
-  const { months } = invoicesData;
+  const { months, restToPay } = invoicesData;
 
   return (
     <article>
@@ -62,6 +62,7 @@ const Invoices = () => {
         close={() => setIsInstallmentsOpen(false)}
         setIsLoading={setIsLoading}
         months={months}
+        restToPay={restToPay}
         idInvoice={idInvoice}
       />
 

@@ -25,7 +25,6 @@ function Spendings() {
     date: '',
   });
   const [idSpending, setIdSpending] = useState('');
-  const [necessity, setNecessity] = useState('');
 
   function openEditModal(spending) {
     const { _id, item, cost, date, necessity } = spending;
@@ -34,9 +33,9 @@ function Spendings() {
       item,
       cost,
       date,
+      necessity,
     });
     setIdSpending(_id);
-    setNecessity(necessity);
   }
 
   return (
@@ -53,7 +52,6 @@ function Spendings() {
         setIsLoading={setIsLoading}
         idSpending={idSpending}
         spendingData={spendingData}
-        necessity={necessity}
       />
 
       <Loading isLoading={isLoading} />
