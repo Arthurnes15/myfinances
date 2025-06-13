@@ -7,6 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import * as actions from '../../store/modules/auth/actions';
 import Loading from '../../components/Loading';
+import TextField from '../../components/Common/TextField/index';
+import Label from '../../components/Common/Label';
+import Input from '../../components/Common/Input';
+import ButtonSubmit from '../../components/Common/ButtonSubmit';
 import logo from '../../assets/images/logo.png';
 import './styles.css';
 
@@ -55,22 +59,29 @@ function Login() {
           </div>
         </header>
         <form onSubmit={handleSubmit(handleSubmitLogin)}>
-          <div className="text-fieldLogin">
-            <label htmlFor="email">Email: </label>
-            <input type="email" placeholder="Email" {...register('email')} />
-            <span className="text-danger">{errors?.email?.message}</span>
-          </div>
-          <div className="text-fieldLogin">
-            <label htmlFor="password">Senha: </label>
-            <input
+          <TextField errors={errors?.email?.message}>
+            <Label htmlFor="email">Email: </Label>
+            <Input
+              type="email"
+              placeholder="Email"
+              register={register('email')}
+            />
+          </TextField>
+          <TextField errors={errors?.password?.message}>
+            <Label htmlFor="email">Senha: </Label>
+            <Input
               type="password"
               placeholder="Senha"
-              {...register('password')}
+              register={register('password')}
             />
-            <span className="text-danger">{errors?.password?.message}</span>
-          </div>
-          <div className="loginButton">
-            <button type="submit">Entrar</button>
+          </TextField>
+
+          <ButtonSubmit>Entrar</ButtonSubmit>
+
+          <div className="redirect">
+            <p>
+              Não possui conta? <a href="/register-user">Cadastre-se</a>
+            </p>
           </div>
         </form>
       </section>

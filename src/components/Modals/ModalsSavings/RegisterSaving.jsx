@@ -5,9 +5,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { number, object, string } from 'yup';
 import { BsCoin, BsPiggyBank, BsTags } from 'react-icons/bs';
 
+import TextField from '../../Common/TextField';
+import Label from '../../Common/Label';
 import Input from '../../Common/Input';
-import TextField from '../../TextField';
-import Modal from '../../Common/Modal';
+import ModalComponent from '../../Common/Modal';
+import ButtonSubmit from '../../Common/ButtonSubmit';
 import axiosClient from '../../../config/axios';
 
 function ModalRegister({ open, close, setIsLoading }) {
@@ -53,7 +55,7 @@ function ModalRegister({ open, close, setIsLoading }) {
 
   if (open) {
     return (
-      <Modal
+      <ModalComponent
         title="Cadastrar Economia"
         open={open}
         close={close}
@@ -63,10 +65,10 @@ function ModalRegister({ open, close, setIsLoading }) {
         <section>
           <form onSubmit={handleSubmit(handleSubmitSaving)}>
             <TextField errors={errors?.name?.message}>
-              <label htmlFor="saving">
+              <Label htmlFor="saving">
                 <BsPiggyBank size={16} />
                 Economia:
-              </label>
+              </Label>
               <Input
                 type="text"
                 placeholder="Economia"
@@ -75,10 +77,10 @@ function ModalRegister({ open, close, setIsLoading }) {
             </TextField>
 
             <TextField errors={errors?.price?.message}>
-              <label htmlFor="price">
+              <Label htmlFor="price">
                 <BsTags size={15} />
                 Preço:
-              </label>
+              </Label>
               <Input
                 type="text"
                 placeholder="Preço"
@@ -87,10 +89,10 @@ function ModalRegister({ open, close, setIsLoading }) {
             </TextField>
 
             <TextField errors={errors?.investment?.message}>
-              <label htmlFor="investment">
+              <Label htmlFor="investment">
                 <BsCoin size={15} />
                 Investimento:
-              </label>
+              </Label>
               <Input
                 type="text"
                 placeholder="Valor"
@@ -98,12 +100,10 @@ function ModalRegister({ open, close, setIsLoading }) {
               />
             </TextField>
 
-            <div className="action">
-              <button type="submit">Cadastrar</button>
-            </div>
+            <ButtonSubmit>Cadastrar</ButtonSubmit>
           </form>
         </section>
-      </Modal>
+      </ModalComponent>
     );
   } else {
     return <></>;

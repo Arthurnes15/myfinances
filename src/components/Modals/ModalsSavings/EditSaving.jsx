@@ -8,7 +8,9 @@ import { toast } from 'react-toastify';
 
 import Input from '../../Common/Input';
 import Modal from '../../Common/Modal';
-import TextField from '../../TextField';
+import Label from '../../Common/Label';
+import TextField from '../../Common/TextField';
+import ButtonSubmit from '../../Common/ButtonSubmit';
 import axiosClient from '../../../config/axios';
 
 function ModalEdit({ open, close, setIsLoading, savingData, idSaving }) {
@@ -67,10 +69,10 @@ function ModalEdit({ open, close, setIsLoading, savingData, idSaving }) {
         <section>
           <form onSubmit={handleSubmit(handleEditSaving)}>
             <TextField errors={errors?.name?.message}>
-              <label htmlFor="saving">
+              <Label htmlFor="saving">
                 <BsPiggyBank size={16} />
                 Nova Economia:
-              </label>
+              </Label>
               <Input
                 type="text"
                 placeholder="Economia"
@@ -79,10 +81,10 @@ function ModalEdit({ open, close, setIsLoading, savingData, idSaving }) {
             </TextField>
 
             <TextField errors={errors?.price?.message}>
-              <label htmlFor="price">
+              <Label htmlFor="price">
                 <BsTags size={15} />
                 Novo Preço:
-              </label>
+              </Label>
               <Input
                 type="text"
                 placeholder="Preço"
@@ -91,10 +93,10 @@ function ModalEdit({ open, close, setIsLoading, savingData, idSaving }) {
             </TextField>
 
             <TextField errors={errors?.investment?.message}>
-              <label htmlFor="investment">
+              <Label htmlFor="investment">
                 <BsCoin size={15} />
                 Novo Valor do Investimento:
-              </label>
+              </Label>
               <Input
                 type="text"
                 placeholder="Valor"
@@ -102,9 +104,7 @@ function ModalEdit({ open, close, setIsLoading, savingData, idSaving }) {
               />
             </TextField>
 
-            <div className="action">
-              <button type="submit">Editar</button>
-            </div>
+            <ButtonSubmit>Editar</ButtonSubmit>
           </form>
         </section>
       </Modal>

@@ -1,10 +1,9 @@
-.login {
+.register-user {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
-.login_content {
+.register-user-content {
   min-width: 30%;
   margin-top: 100px;
   padding: 20px;
@@ -12,47 +11,40 @@
   border-radius: 8px;
 }
 
-.login_content:hover {
+.register-user-content:hover {
   box-shadow: 1px 2px 10px 5px #257464;
   transition: 0.5s;
 }
 
-.title {
+.header-user {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 12px;
+  margin-bottom: 15px;
 }
 
-.text h1 {
+.title-user h1 {
   font-family: 'SerifDisplay';
   font-weight: 400;
   font-size: 35px;
   color: white;
 }
 
-.redirect {
+.registerButton {
+  min-width: 100%;
   display: flex;
   justify-content: center;
-  margin: 20px 0 15px 0;
+}
+
+.registerButton button {
+  width: 100%;
+  border: none;
+  border-radius: 3px;
+  background-color: #184c42;
   color: white;
-}
-
-.redirect a {
-  color: #257464;
-}
-
-/* Cellphone Size */
-@media (max-width: 540px) {
-  .login_content {
-    width: 300px;
-  }
-}
-
-/* Tablet Size */
-@media (max-width: 1024px) and (min-width: 500px) {
-  .login_content {
-    margin-top: 240px;
-    width: 60vw;
-  }
+  cursor: pointer;
+  font-size: 16px;
+  margin: 20px 0 15px 0;
+  padding: 8px;
 }

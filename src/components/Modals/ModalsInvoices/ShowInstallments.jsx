@@ -4,6 +4,7 @@ import { boolean, number, object } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import ModalComponent from '../../Common/Modal';
+import Label from '../../Common/Label';
 import Button from '../../Common/Button';
 import axiosClient from '../../../config/axios';
 import './styles.css';
@@ -73,7 +74,7 @@ function ModalInstallments({
       <form onSubmit={handleSubmit(handleEditMonth)}>
         {months?.map((month, index) => (
           <div key={index} className="months">
-            <label htmlFor="month">{month.month}</label>
+            <Label htmlFor="month">{month.month}</Label>
             <Controller
               control={control}
               name="checked"

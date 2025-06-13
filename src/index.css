@@ -3,6 +3,11 @@
   src: url(./assets/fonts/Poppins/Poppins-Regular.ttf);
 }
 
+@font-face {
+  font-family: 'SerifDisplay';
+  src: url(./assets/fonts/SerifDisplay/DMSerifDisplay-Regular.ttf);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -24,10 +29,10 @@ body {
   transition: opacity 500ms ease-in-out;
 }
 
-.ReactModal__Overlay--after-open{
+.ReactModal__Overlay--after-open {
   opacity: 1;
 }
 
-.ReactModal__Overlay--before-close{
+.ReactModal__Overlay--before-close {
   opacity: 0;
 }

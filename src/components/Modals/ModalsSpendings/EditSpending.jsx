@@ -14,10 +14,12 @@ import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
 import { necessities } from '../../../utils/necessities';
-import Modal from '../../Common/Modal';
-import axiosClient from '../../../config/axios';
-import TextField from '../../TextField';
+import ModalComponent from '../../Common/Modal';
+import TextField from '../../Common/TextField';
+import Label from '../../Common/Label';
 import Input from '../../Common/Input';
+import ButtonSubmit from '../../Common/ButtonSubmit';
+import axiosClient from '../../../config/axios';
 
 function ModalEdit({ open, close, setIsLoading, idSpending, spendingData }) {
   const { item, cost, dateSpending, necessity } = spendingData;
@@ -75,7 +77,7 @@ function ModalEdit({ open, close, setIsLoading, idSpending, spendingData }) {
   }
 
   return (
-    <Modal
+    <ModalComponent
       title="Editar Gasto"
       open={open}
       close={close}
@@ -85,17 +87,17 @@ function ModalEdit({ open, close, setIsLoading, idSpending, spendingData }) {
       <section>
         <form onSubmit={handleSubmit(handleEditSpending)}>
           <TextField>
-            <label htmlFor="item">
+            <Label htmlFor="item">
               <BsTag size={15} />
               Novo Item:
-            </label>
+            </Label>
             <Input type="text" placeholder="Item" register={register('item')} />
           </TextField>
           <TextField>
-            <label htmlFor="cost">
+            <Label htmlFor="cost">
               <BsCashCoin size={15} />
               Novo Valor:
-            </label>
+            </Label>
             <Input
               type="text"
               placeholder="Valor"
@@ -103,10 +105,10 @@ function ModalEdit({ open, close, setIsLoading, idSpending, spendingData }) {
             />
           </TextField>
           <TextField>
-            <label htmlFor="date">
+            <Label htmlFor="date">
               <BsCalendarWeek size={15} />
               Nova Data:
-            </label>
+            </Label>
             <Input
               type="date"
               style={{ width: '97%' }}
@@ -114,10 +116,10 @@ function ModalEdit({ open, close, setIsLoading, idSpending, spendingData }) {
             />
           </TextField>
           <TextField errors={errors?.item?.message}>
-            <label htmlFor="item">
+            <Label htmlFor="necessity">
               <BsBookmarkStar size={15} />
               Grau de Necessidade:
-            </label>
+            </Label>
             <Controller
               control={control}
               name="necessity"
@@ -136,12 +138,10 @@ function ModalEdit({ open, close, setIsLoading, idSpending, spendingData }) {
             />
           </TextField>
 
-          <div className="action">
-            <button type="submit">Editar</button>
-          </div>
+          <ButtonSubmit>Editar</ButtonSubmit>
         </form>
       </section>
-    </Modal>
+    </ModalComponent>
   );
 }
 

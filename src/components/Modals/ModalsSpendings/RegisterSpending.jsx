@@ -8,10 +8,12 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 
 import { necessities } from '../../../utils/necessities';
-import axiosClient from '../../../config/axios';
-import Modal from '../../Common/Modal';
+import ModalComponent from '../../Common/Modal';
+import TextField from '../../Common/TextField';
+import Label from '../../Common/Label';
 import Input from '../../Common/Input';
-import TextField from '../../TextField';
+import ButtonSubmit from '../../Common/ButtonSubmit';
+import axiosClient from '../../../config/axios';
 
 function ModalRegister({ open, close, setIsLoading }) {
   const user = useSelector((state) => state.auth.user.email);
@@ -58,7 +60,7 @@ function ModalRegister({ open, close, setIsLoading }) {
   }
   if (open) {
     return (
-      <Modal
+      <ModalComponent
         title="Cadastrar Gasto"
         open={open}
         close={close}
@@ -68,10 +70,10 @@ function ModalRegister({ open, close, setIsLoading }) {
         <section>
           <form onSubmit={handleSubmit(handleSubmitSpending)}>
             <TextField errors={errors?.item?.message}>
-              <label htmlFor="item">
+              <Label htmlFor="item">
                 <BsTag size={15} />
                 Item:
-              </label>
+              </Label>
               <Input
                 type="text"
                 placeholder="Item"
@@ -79,10 +81,10 @@ function ModalRegister({ open, close, setIsLoading }) {
               />
             </TextField>
             <TextField errors={errors?.item?.message}>
-              <label htmlFor="item">
+              <Label htmlFor="cost">
                 <BsCashCoin size={15} />
                 Valor:
-              </label>
+              </Label>
               <Input
                 type="text"
                 placeholder="Valor"
@@ -90,10 +92,10 @@ function ModalRegister({ open, close, setIsLoading }) {
               />
             </TextField>
             <TextField errors={errors?.item?.message}>
-              <label htmlFor="item">
+              <Label htmlFor="necessity">
                 <BsBookmarkStar size={15} />
                 Grau de Necessidade:
-              </label>
+              </Label>
               <Controller
                 control={control}
                 name="necessity"
@@ -110,12 +112,10 @@ function ModalRegister({ open, close, setIsLoading }) {
               />
             </TextField>
 
-            <div className="action">
-              <button type="submit">Cadastrar</button>
-            </div>
+            <ButtonSubmit>Cadastrar</ButtonSubmit>
           </form>
         </section>
-      </Modal>
+      </ModalComponent>
     );
   } else {
     return <></>;

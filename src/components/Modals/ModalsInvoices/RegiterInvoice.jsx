@@ -1,15 +1,17 @@
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { BsCalendar2, BsCashCoin, BsListOl, BsTag } from 'react-icons/bs';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSelector } from 'react-redux';
 import { date, number, object, string } from 'yup';
+import { toast } from 'react-toastify';
 
 import ModalComponent from '../../Common/Modal';
-import TextField from '../../TextField';
-import { BsCalendar2, BsCashCoin, BsListOl, BsTag } from 'react-icons/bs';
+import TextField from '../../Common/TextField';
+import Label from '../../Common/Label';
 import Input from '../../Common/Input';
+import ButtonSubmit from '../../Common/ButtonSubmit';
 import axiosClient from '../../../config/axios';
-import { toast } from 'react-toastify';
 
 function ModalRegister({ open, close, setIsLoading }) {
   const user = useSelector((state) => state.auth.user.email);
@@ -63,10 +65,10 @@ function ModalRegister({ open, close, setIsLoading }) {
         <section>
           <form onSubmit={handleSubmit(handleSubmitInvoice)}>
             <TextField errors={errors?.item?.message}>
-              <label htmlFor="item">
+              <Label htmlFor="item">
                 <BsTag size={15} />
                 Item:
-              </label>
+              </Label>
               <Input
                 type="text"
                 placeholder="Nome"
@@ -74,10 +76,10 @@ function ModalRegister({ open, close, setIsLoading }) {
               />
             </TextField>
             <TextField errors={errors?.item?.message}>
-              <label htmlFor="item">
+              <Label htmlFor="price">
                 <BsCashCoin size={15} />
                 Preço:
-              </label>
+              </Label>
               <Input
                 type="text"
                 placeholder="Valor"
@@ -85,10 +87,10 @@ function ModalRegister({ open, close, setIsLoading }) {
               />
             </TextField>
             <TextField errors={errors?.item?.message}>
-              <label htmlFor="item">
+              <Label htmlFor="installments">
                 <BsListOl size={15} />
                 Número de Parcelas:
-              </label>
+              </Label>
               <Input
                 type="number"
                 placeholder="Parcelas"
@@ -96,19 +98,18 @@ function ModalRegister({ open, close, setIsLoading }) {
               />
             </TextField>
             <TextField errors={errors?.item?.message}>
-              <label htmlFor="item">
+              <Label htmlFor="date">
                 <BsCalendar2 size={15} />
                 Data da Compra
-              </label>
+              </Label>
               <Input
                 type="date"
                 placeholder="Data"
                 register={register('date')}
               />
             </TextField>
-            <div className="action">
-              <button type="submit">Cadastrar</button>
-            </div>
+
+            <ButtonSubmit>Cadastrar</ButtonSubmit>
           </form>
         </section>
       </ModalComponent>

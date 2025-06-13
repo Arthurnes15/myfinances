@@ -1,8 +1,9 @@
 input {
+  font-family: 'Poppins';
   height: 30px;
   font-size: 14px;
   padding: 5px;
   outline: none;
-  border: 1px solid #184C42;
+  border: 1px solid #184c42;
   border-radius: 4px;
 }

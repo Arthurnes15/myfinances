@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Invoices from './pages/Invoices';
 import Savings from './pages/Savings';
 import Spendings from './pages/Spendings';
+import RegisterUser from './pages/RegisterUser';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/register-user" element={<RegisterUser />} />
             <Route path="/spendings" element={<Spendings />} />
             <Route path="/invoices" element={<Invoices />} />
             <Route path="/savings" element={<Savings />} />
