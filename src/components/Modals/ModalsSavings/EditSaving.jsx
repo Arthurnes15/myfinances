@@ -40,6 +40,8 @@ function ModalEdit({ open, close, setIsLoading, savingData, idSaving }) {
     setValue('investment', investment);
   }, [setValue, savingData]);
 
+  // TODO: Editar imagem
+
   async function handleEditSaving(data) {
     setIsLoading(true);
     try {

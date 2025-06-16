@@ -1,0 +1,11 @@
+.image-upload {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  background-color: #184c42;
+  font-family: 'Poppins';
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+}
