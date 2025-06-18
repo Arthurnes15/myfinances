@@ -9,6 +9,7 @@ import Invoices from './pages/Invoices';
 import Savings from './pages/Savings';
 import Spendings from './pages/Spendings';
 import RegisterUser from './pages/RegisterUser';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/spendings" element={<Spendings />} />
             <Route path="/invoices" element={<Invoices />} />
             <Route path="/savings" element={<Savings />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <ToastContainer autoClose={3000} />
         </BrowserRouter>

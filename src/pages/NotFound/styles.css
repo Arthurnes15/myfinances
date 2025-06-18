@@ -1,0 +1,26 @@
+.error404 {
+  height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.747);
+}
+
+.error404 button {
+  background-color: #184C42;
+  margin-top: 20px;
+  padding: 8px;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Poppins';
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+}
+
+.error404 button:hover {
+  background-color: #16423a;
+  transition: 0.5s;
+}
