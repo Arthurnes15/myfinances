@@ -1,0 +1,17 @@
+
+.header-account {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: white;
+  margin: 10px 0 30px 10px;
+}
+
+.private-data .data {
+  display: flex;
+  gap: 5px;
+  margin: 5px 0 20px 5px;
+  padding: 5px;
+  color: white;
+}
+

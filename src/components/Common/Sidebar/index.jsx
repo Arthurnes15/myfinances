@@ -105,8 +105,8 @@ function Sidebar() {
 
         <div id="logout">
           <button id="logout_btn" onClick={handleLogout}>
-            <BsBoxArrowRight size={20} />
-            <span>Sair</span>
+            <BsBoxArrowRight size={30} />
+            <span className="item-description">Sair</span>
           </button>
         </div>
       </nav>

@@ -46,10 +46,10 @@ function Navbar() {
           </li>
           <li
             className={clsx('nav-item', {
-              ' active': location.pathname === '/user',
+              ' active': location.pathname === '/account',
             })}
           >
-            <Link to="/user">
+            <Link to="/account">
               <BsPersonCircle size={25} />
               Conta
             </Link>

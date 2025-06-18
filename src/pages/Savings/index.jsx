@@ -10,7 +10,7 @@ import axiosClient from '../../config/axios';
 import Loading from '../../components/Loading';
 import Sidebar from '../../components/Common/Sidebar/index';
 import Saving from '../../components/Saving';
-import Navbar from '../../components/Common/Navbar';
+import BottomBar from '../../components/Common/BottomBar';
 import ModalRegister from '../../components/Modals/ModalsSavings/RegisterSaving';
 import ModalEdit from '../../components/Modals/ModalsSavings/EditSaving';
 import Header from '../../components/Common/Header';
@@ -104,7 +104,7 @@ const Savings = () => {
 
       <Loading isLoading={isLoading} />
       <HeaderMobile />
-      <Navbar />
+      <BottomBar />
       <Sidebar />
 
       <Container>
@@ -117,7 +117,7 @@ const Savings = () => {
         <main className="all-savings">
           {savings.map((saving, index) => (
             <Saving
-              key={saving._id}
+              key={index}
               image={saving.image || fund}
               name={saving.name}
               price={saving.price}

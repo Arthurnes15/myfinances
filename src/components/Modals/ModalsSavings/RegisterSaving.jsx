@@ -70,7 +70,9 @@ function ModalRegister({ open, close, setIsLoading }) {
   async function handleSubmitSaving(data) {
     try {
       setIsLoading(true);
-      const image = await convertToBase64(data.image);
+
+      const image =
+        typeof data.image === 'object' ? await convertToBase64(data.image) : '';
 
       await axiosClient.post('savings', {
         name: data.name,

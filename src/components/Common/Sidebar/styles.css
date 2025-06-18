@@ -1,8 +1,3 @@
-@font-face {
-  font-family: 'SerifDisplay';
-  src: url(../../../assets/fonts/SerifDisplay/DMSerifDisplay-Regular.ttf);
-}
-
 #sidebar_content .header {
   display: flex;
   justify-content: center;
@@ -56,29 +51,21 @@
 }
 
 .side-item {
-  border: 8px;
   margin: 8px 0;
   padding: 10px;
   cursor: pointer;
 }
 
-
 .side-item.active {
-  background-color: #184C42;
+  background-color: #184c42;
   border: 1px solid white;
   border-radius: 10px;
 }
 
 .side-item:hover:not(.active) {
-  background-color: #184C42;
+  background-color: #184c42;
   border-radius: 10px;
-}
-
-
-#logout_btn:hover {
-  background-color: rgb(228, 46, 36);
-  color: white;
-  transition: all 0.3s;
+  transition: 0.2s;
 }
 
 .side-item a {
@@ -89,21 +76,17 @@
   color: white;
 }
 
-.side-item a svg {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 #logout {
   border-top: 1px solid white;
   padding: 12px;
 }
 
 #logout_btn {
+  width: 100%;
+  height: 52px;
   display: flex;
-  gap: 20px;
   align-items: center;
+  justify-content: center;
   border-top: none;
   padding: 12px;
   font-size: 14px;
@@ -115,13 +98,19 @@
   cursor: pointer;
 }
 
+#logout_btn:hover {
+  background-color: rgb(228, 46, 36);
+  color: white;
+  transition: all 0.3s;
+}
+
 #open_btn {
   position: absolute;
   height: 30px;
   top: 60px;
   right: -15px;
   color: white;
-  background: #184C42;
+  background: #184c42;
   border: none;
   border-radius: 100%;
   cursor: pointer;
@@ -147,8 +136,12 @@
   height: auto;
 }
 
-
 #sidebar.open-sidebar .side-item a {
+  justify-content: flex-start;
+  gap: 14px;
+}
+
+#sidebar.open-sidebar #logout_btn {
   justify-content: flex-start;
   gap: 14px;
 }

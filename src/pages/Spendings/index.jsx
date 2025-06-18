@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import verifyUser from '../../hooks/verifyUser';
 import Sidebar from '../../components/Common/Sidebar';
-import Navbar from '../../components/Common/Navbar';
+import BottomBar from '../../components/Common/BottomBar';
 import Loading from '../../components/Loading';
 import ModalRegister from '../../components/Modals/ModalsSpendings/RegisterSpending';
 import ModalEdit from '../../components/Modals/ModalsSpendings/EditSpending';
@@ -57,7 +57,7 @@ function Spendings() {
       <Loading isLoading={isLoading} />
       <Sidebar />
       <HeaderMobile />
-      <Navbar />
+      <BottomBar />
 
       <Container>
         <Header

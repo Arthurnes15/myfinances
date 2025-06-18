@@ -60,3 +60,10 @@ td {
     padding: 10px;
   }
 }
+
+/* Cellphone size */
+@media (max-width: 540px) {
+  .all-spendings {
+    margin-bottom: 50px;
+  }
+}
