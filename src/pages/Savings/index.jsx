@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import * as actions from '../../store/modules/auth/actions';
-import verifyUser from '../../hooks/verifyUser';
+import useVerifyUser from '../../hooks/useVerifyUser';
 import axiosClient from '../../config/axios';
 import Loading from '../../components/Loading';
 import Sidebar from '../../components/Common/Sidebar/index';
@@ -20,7 +20,7 @@ import fund from '../../assets/images/fund.jpg';
 import './styles.css';
 
 const Savings = () => {
-  verifyUser();
+  useVerifyUser();
 
   const dispatch = useDispatch();
   const [modalIsOpen, setIsOpen] = useState(false);

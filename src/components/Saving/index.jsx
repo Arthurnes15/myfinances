@@ -32,7 +32,6 @@ function Saving({
     }
   }, [progressRef, percentage]);
 
-  // TODO: Fallback
   return (
     <section className="saving">
       <div className="saving-image">

@@ -9,6 +9,7 @@
 /* Cellphone Size */
 @media (max-width: 540px) {
   .all-savings {
+    justify-content: center;
     grid-template-columns: 1fr;
     gap: 50px;
     margin-bottom: 50px;

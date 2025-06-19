@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BsCreditCard2Front } from 'react-icons/bs';
 
-import verifyUser from '../../hooks/verifyUser';
+import useVerifyUser from '../../hooks/useVerifyUser';
 import Sidebar from '../../components/Common/Sidebar/index';
 import BottomBar from '../../components/Common/BottomBar';
 import Header from '../../components/Common/Header';
@@ -15,7 +15,7 @@ import HeaderMobile from '../../components/Common/HeaderMobile';
 import './styles.css';
 
 const Invoices = () => {
-  verifyUser();
+  useVerifyUser();
   const [isLoading, setIsLoading] = useState(false);
   const [invoices, setInvoices] = useState([]);
   const [invoicesData, setInvoicesData] = useState([]);

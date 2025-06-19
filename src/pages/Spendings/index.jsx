@@ -1,7 +1,7 @@
 import { BsWallet } from 'react-icons/bs';
 import { useState } from 'react';
 
-import verifyUser from '../../hooks/verifyUser';
+import useVerifyUser from '../../hooks/useVerifyUser';
 import Sidebar from '../../components/Common/Sidebar';
 import BottomBar from '../../components/Common/BottomBar';
 import Loading from '../../components/Loading';
@@ -13,7 +13,7 @@ import Container from '../../components/Common/Container';
 import HeaderMobile from '../../components/Common/HeaderMobile';
 
 function Spendings() {
-  verifyUser();
+  useVerifyUser();
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalEditIsOpen, setEditIsOpen] = useState(false);

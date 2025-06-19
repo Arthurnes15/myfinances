@@ -25,6 +25,7 @@
 
 @media (max-width: 540px) {
   .all-invoices {
+    justify-content: center;
     grid-template-columns: 1fr;
     margin: 0 40px;
   }

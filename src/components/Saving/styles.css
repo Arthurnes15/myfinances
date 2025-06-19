@@ -24,6 +24,14 @@
   padding: 20px;
 }
 
+.saving-information .information {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  gap: 8px;
+  padding-bottom: 4px;
+}
+
 .progress-actions {
   display: flex;
   justify-content: space-between;

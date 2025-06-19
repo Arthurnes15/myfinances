@@ -4,14 +4,30 @@
   align-items: center;
   gap: 6px;
   color: white;
-  margin: 10px 0 30px 10px;
+  padding: 10px;
+}
+
+.header-account h1 {
+  font-size: 25px;
+}
+
+.private-data {
+  margin-top: 20px;
 }
 
 .private-data .data {
   display: flex;
-  gap: 5px;
+  align-items: center;
+  gap: 7px;
   margin: 5px 0 20px 5px;
   padding: 5px;
   color: white;
+  font-size: 14px;
+
 }
 
+.data .data-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
