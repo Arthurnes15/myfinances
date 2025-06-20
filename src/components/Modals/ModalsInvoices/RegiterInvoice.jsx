@@ -100,11 +100,12 @@ function ModalRegister({ open, close, setIsLoading }) {
             <TextField errors={errors?.item?.message}>
               <Label htmlFor="date">
                 <BsCalendar2 size={15} />
-                Data da Compra
+                Data
               </Label>
               <Input
                 type="date"
-                placeholder="Data"
+                style={{ width: '97%' }}
+                placeholder="Data da Compra"
                 register={register('date')}
               />
             </TextField>

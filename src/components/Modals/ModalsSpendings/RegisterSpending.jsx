@@ -1,7 +1,7 @@
 import { date, number, object, string } from 'yup';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { BsBookmarkStar, BsCashCoin, BsTag } from 'react-icons/bs';
+import { BsBookmarkStar, BsCalendar2, BsCashCoin, BsTag } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
@@ -23,9 +23,7 @@ function ModalRegister({ open, close, setIsLoading }) {
     cost: number()
       .typeError('Deve ser um número')
       .required('Campo obrigatório'),
-    date: date()
-      .default(() => new Date())
-      .typeError('Data inválida'),
+    date: date().typeError('Data inválida'),
     necessity: string().required('Campo obrigatório'),
   });
 
@@ -72,11 +70,11 @@ function ModalRegister({ open, close, setIsLoading }) {
             <TextField errors={errors?.item?.message}>
               <Label htmlFor="item">
                 <BsTag size={15} />
-                Item:
+                Gasto:
               </Label>
               <Input
                 type="text"
-                placeholder="Item"
+                placeholder="Nome do Gasto"
                 register={register('item')}
               />
             </TextField>
@@ -87,8 +85,20 @@ function ModalRegister({ open, close, setIsLoading }) {
               </Label>
               <Input
                 type="text"
-                placeholder="Valor"
+                placeholder="Valor do Gasto"
                 register={register('cost')}
+              />
+            </TextField>
+            <TextField errors={errors?.item?.message}>
+              <Label htmlFor="cost">
+                <BsCalendar2 size={15} />
+                Data:
+              </Label>
+              <Input
+                type="date"
+                style={{ width: '97%' }}
+                placeholder="Data do Gasto"
+                register={register('dates')}
               />
             </TextField>
             <TextField errors={errors?.item?.message}>

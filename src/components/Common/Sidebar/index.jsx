@@ -16,6 +16,7 @@ import clsx from 'clsx';
 import * as actions from '../../../store/modules/auth/actions';
 import logo from '../../../assets/images/logo.png';
 import './styles.css';
+import ToggleTheme from '../../ToggleTheme';
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -45,8 +46,11 @@ function Sidebar() {
       <nav id="sidebar" className={classOpen}>
         <div id="sidebar_content">
           <div className="header">
-            <img src={logo} alt="" />
-            <h1 id="title">MyFinances</h1>
+            <div className="logo">
+              <img src={logo} alt="" />
+              <h1 id="title">MyFinances</h1>
+            </div>
+            <ToggleTheme />
           </div>
           <div id="user">
             <BsPersonCircle size={24} />

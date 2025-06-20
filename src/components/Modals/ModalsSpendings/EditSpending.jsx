@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { date, number, object, string } from 'yup';
+import { date as dateYup, number, object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   BsBookmarkStar,
@@ -22,20 +22,19 @@ import ButtonSubmit from '../../Common/ButtonSubmit';
 import axiosClient from '../../../config/axios';
 
 function ModalEdit({ open, close, setIsLoading, idSpending, spendingData }) {
-  const { item, cost, dateSpending, necessity } = spendingData;
+  const { item, cost, date, necessity } = spendingData;
   const indexNecessity = necessities.findIndex(
     (value) => value.value === necessity
   );
   const user = useSelector((state) => state.auth.user.email);
+  const dateSpending = date.split('T')[0];
 
   const schema = object({
     item: string().required('Campo obrigatório'),
     cost: number()
       .typeError('Deve ser um número')
       .required('Campo obrigatório'),
-    date: date()
-      .default(() => new Date())
-      .typeError('Data inválida'),
+    date: dateYup().typeError('Data inválida'),
     necessity: string().required('Campo obrigatório'),
   });
 

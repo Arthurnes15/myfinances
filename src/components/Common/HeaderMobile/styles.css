@@ -7,6 +7,12 @@
   display: none;
 }
 
+.header-mobile .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .header-mobile img {
   width: 50px;
   height: auto;
@@ -19,10 +25,15 @@
   color: white;
 }
 
+.toggle-theme {
+  margin-right: 5px;
+}
+
 /* Cellphone Size */
 @media (max-width: 540px) {
   .header-mobile {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 2px 10px;
     gap: 10px;
