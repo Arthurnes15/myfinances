@@ -101,7 +101,7 @@ function ModalRegister({ open, close, setIsLoading }) {
                 type="date"
                 style={{ width: '97%' }}
                 placeholder="Data do Gasto"
-                register={register('dates')}
+                register={register('date')}
               />
             </TextField>
             <TextField errors={errors?.item?.message}>
