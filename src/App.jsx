@@ -17,8 +17,8 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <BrowserRouter>
-          <ThemeProvider>
+        <ThemeProvider>
+          <BrowserRouter>
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/register-user" element={<RegisterUser />} />
@@ -28,9 +28,9 @@ function App() {
               <Route path="/account" element={<Account />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </ThemeProvider>
-          <ToastContainer autoClose={3000} />
-        </BrowserRouter>
+            <ToastContainer autoClose={3000} />
+          </BrowserRouter>
+        </ThemeProvider>
       </PersistGate>
     </Provider>
   );

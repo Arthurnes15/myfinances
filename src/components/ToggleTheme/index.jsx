@@ -8,7 +8,7 @@ function ToggleTheme() {
   const [, toggleTheme] = useContext(ThemeContext);
 
   const toggle = localStorage.getItem('toggle');
-  const checked = toggle.includes('true') ? true : false;
+  const checked = toggle?.toString() === 'true' ? true : false;
 
   return (
     <label className="switch">
