@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { BsCreditCard2Front } from 'react-icons/bs';
 
+import { ThemeContext } from '../../contexts/ThemeContext';
 import useVerifyUser from '../../hooks/useVerifyUser';
 import Sidebar from '../../components/Common/Sidebar/index';
 import BottomBar from '../../components/Common/BottomBar';
 import Header from '../../components/Common/Header';
+import Container from '../../components/Common/Container';
 import Loading from '../../components/Loading';
 import axiosClient from '../../config/axios';
 import Invoice from '../../components/Invoice';
 import ModalInstallments from '../../components/Modals/ModalsInvoices/ShowInstallments';
 import ModalRegister from '../../components/Modals/ModalsInvoices/RegiterInvoice';
-import Container from '../../components/Common/Container';
+import Content from '../../components/Common/Content';
 import HeaderMobile from '../../components/Common/HeaderMobile';
 import './styles.css';
 
@@ -22,6 +24,7 @@ const Invoices = () => {
   const [idInvoice, setIdInvoice] = useState('');
   const [isInstallmentsOpen, setIsInstallmentsOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  const [{ theme }] = useContext(ThemeContext);
 
   useEffect(() => {
     async function getData() {
@@ -51,7 +54,7 @@ const Invoices = () => {
   const { months, restToPay } = invoicesData;
 
   return (
-    <article>
+    <Container>
       <ModalRegister
         open={isRegisterOpen}
         close={() => setIsRegisterOpen(false)}
@@ -71,9 +74,11 @@ const Invoices = () => {
       <HeaderMobile />
       <BottomBar />
 
-      <Container>
+      <Content>
         <Header
-          icon={<BsCreditCard2Front size={35} />}
+          icon={
+            <BsCreditCard2Front size={35} color={theme.textColorSecondary} />
+          }
           title="Fatura"
           onClick={() => setIsRegisterOpen(true)}
         />
@@ -89,8 +94,8 @@ const Invoices = () => {
             />
           ))}
         </main>
-      </Container>
-    </article>
+      </Content>
+    </Container>
   );
 };
 

@@ -3,9 +3,9 @@
   height: 150px;
   border: 1px solid white;
   border-radius: 8px;
-  background-color: #313131;
   color: white;
   padding: 15px;
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.384);
 }
 
 .header-invoice {
@@ -28,13 +28,22 @@
 
 .invoice-details {
   height: 30px;
-  border: 1px solid white;
   border-radius: 20px;
   padding: 5px;
   cursor: pointer;
 }
 
 .invoice-details:hover {
+  background-color: #f1f0f0;
+  transition: 0.3s;
+}
+
+.invoice-details.dark {
+  border-color: white;
+}
+
+
+.invoice-details.dark:hover {
   background-color: #494949;
   transition: 0.3s;
 }

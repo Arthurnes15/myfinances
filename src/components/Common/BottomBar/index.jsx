@@ -8,14 +8,24 @@ import {
 import clsx from 'clsx';
 
 import './styles.css';
+import { useContext } from 'react';
+import { ThemeContext } from '../../../contexts/ThemeContext';
 
 function Navbar() {
+  const [{ theme, isDark }] = useContext(ThemeContext);
+
   return (
-    <nav id="navbar">
+    <nav
+      id="navbar"
+      style={{
+        backgroundColor: theme.backgroundColor,
+      }}
+    >
       <div id="navbar-content">
         <ul id="nav-items">
           <li
             className={clsx('nav-item', {
+              ' dark': isDark,
               ' active': location.pathname === '/spendings',
             })}
           >
@@ -26,6 +36,7 @@ function Navbar() {
           </li>
           <li
             className={clsx('nav-item', {
+              ' dark': isDark,
               ' active': location.pathname === '/invoices',
             })}
           >
@@ -36,6 +47,7 @@ function Navbar() {
           </li>
           <li
             className={clsx('nav-item', {
+              ' dark': isDark,
               ' active': location.pathname === '/savings',
             })}
           >
@@ -46,6 +58,7 @@ function Navbar() {
           </li>
           <li
             className={clsx('nav-item', {
+              ' dark': isDark,
               ' active': location.pathname === '/account',
             })}
           >

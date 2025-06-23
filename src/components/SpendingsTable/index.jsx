@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   BsBookmarkStar,
@@ -13,6 +13,7 @@ import { get } from 'lodash';
 import { toast } from 'react-toastify';
 
 import { dateFormatter } from '../../utils/dataFormatter';
+import { ThemeContext } from '../../contexts/ThemeContext';
 import * as actions from '../../store/modules/auth/actions';
 import Button from '../Common/Button';
 import axiosClient from '../../config/axios';
@@ -20,6 +21,7 @@ import './styles.css';
 
 function SpendingsTable({ setIsLoading, openEditModal }) {
   const [spendings, setSpendings] = useState([]);
+  const [{ theme }] = useContext(ThemeContext);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -61,7 +63,10 @@ function SpendingsTable({ setIsLoading, openEditModal }) {
 
   return (
     <main className="all-spendings">
-      <table className="spendings">
+      <table
+        className="spendings"
+        style={{ border: `1px solid ${theme.textColor}` }}
+      >
         <thead>
           <tr>
             <th>
@@ -94,20 +99,39 @@ function SpendingsTable({ setIsLoading, openEditModal }) {
         <tbody>
           {spendings.map((spending, index) => (
             <tr key={index}>
-              <td>{spending.item}</td>
-              <td>
+              <td
+                style={{
+                  color: theme.textColor,
+                  borderBottom: `1px solid ${theme.textColor}`,
+                }}
+              >
+                {spending.item}
+              </td>
+              <td
+                style={{
+                  color: theme.textColor,
+                  borderBottom: `1px solid ${theme.textColor}`,
+                }}
+              >
                 {spending.cost.toLocaleString('pt-br', {
                   style: 'currency',
                   currency: 'BRL',
                 })}
               </td>
-              <td>{dateFormatter(spending.date)}</td>
-              <td>
+              <td
+                style={{
+                  color: theme.textColor,
+                  borderBottom: `1px solid ${theme.textColor}`,
+                }}
+              >
+                {dateFormatter(spending.date)}
+              </td>
+              <td style={{ borderBottom: `1px solid ${theme.textColor}` }}>
                 <span className="necessity" color={spending.necessity}>
                   {spending.necessity}
                 </span>
               </td>
-              <td>
+              <td style={{ borderBottom: `1px solid ${theme.textColor}` }}>
                 <Button
                   type="button"
                   className="edit"
@@ -116,7 +140,7 @@ function SpendingsTable({ setIsLoading, openEditModal }) {
                   <BsPencilSquare size={20} color="white" />
                 </Button>
               </td>
-              <td>
+              <td style={{ borderBottom: `1px solid ${theme.textColor}` }}>
                 <Button
                   type="button"
                   className="delete"

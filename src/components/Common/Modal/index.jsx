@@ -3,6 +3,8 @@ import { BsXCircle } from 'react-icons/bs';
 import Modal from 'react-modal';
 
 import './styles.css';
+import { useContext } from 'react';
+import { ThemeContext } from '../../../contexts/ThemeContext';
 
 Modal.setAppElement('#root');
 
@@ -15,11 +17,14 @@ function ModalComponent({
   title,
   children,
 }) {
+  const [{ theme }] = useContext(ThemeContext);
+
   if (open) {
     return (
       <Modal
         id={id}
         className={className}
+        style={{ content: { backgroundColor: theme.backgroundColor } }}
         isOpen={open}
         parentSelector={() => document.querySelector('#root')}
         onRequestClose={close}
@@ -27,7 +32,7 @@ function ModalComponent({
         overlayClassName="modal-overlay"
       >
         <header className="header-modal">
-          <h1>{title}</h1>
+          <h1 style={{ color: theme.textColor }}>{title}</h1>
           <button type="button" onClick={close} className="close-modal">
             <BsXCircle size={40} color="red" />
           </button>

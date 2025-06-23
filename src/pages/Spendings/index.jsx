@@ -1,15 +1,17 @@
 import { BsWallet } from 'react-icons/bs';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
+import { ThemeContext } from '../../contexts/ThemeContext';
 import useVerifyUser from '../../hooks/useVerifyUser';
 import Sidebar from '../../components/Common/Sidebar';
 import BottomBar from '../../components/Common/BottomBar';
 import Loading from '../../components/Loading';
+import Container from '../../components/Common/Container';
 import ModalRegister from '../../components/Modals/ModalsSpendings/RegisterSpending';
 import ModalEdit from '../../components/Modals/ModalsSpendings/EditSpending';
 import SpendingsTable from '../../components/SpendingsTable';
 import Header from '../../components/Common/Header';
-import Container from '../../components/Common/Container';
+import Content from '../../components/Common/Content';
 import HeaderMobile from '../../components/Common/HeaderMobile';
 
 function Spendings() {
@@ -25,6 +27,7 @@ function Spendings() {
     date: '',
   });
   const [idSpending, setIdSpending] = useState('');
+  const [{ theme }] = useContext(ThemeContext);
 
   function openEditModal(spending) {
     const { _id, item, cost, date, necessity } = spending;
@@ -39,7 +42,7 @@ function Spendings() {
   }
 
   return (
-    <article>
+    <Container>
       <ModalRegister
         open={modalIsOpen}
         close={() => setIsOpen(false)}
@@ -59,9 +62,9 @@ function Spendings() {
       <HeaderMobile />
       <BottomBar />
 
-      <Container>
+      <Content>
         <Header
-          icon={<BsWallet size={35} />}
+          icon={<BsWallet size={35} color={theme.textColorSecondary} />}
           title="Gastos"
           onClick={() => setIsOpen(true)}
         />
@@ -70,8 +73,8 @@ function Spendings() {
           setIsLoading={setIsLoading}
           openEditModal={openEditModal}
         />
-      </Container>
-    </article>
+      </Content>
+    </Container>
   );
 }
 

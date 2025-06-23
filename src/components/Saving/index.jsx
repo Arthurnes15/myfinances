@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import {
   BsTags,
   BsCoin,
@@ -8,6 +8,7 @@ import {
   BsTrashFill,
 } from 'react-icons/bs';
 
+import { ThemeContext } from '../../contexts/ThemeContext';
 import Button from '../Common/Button';
 import './styles.css';
 
@@ -21,6 +22,7 @@ function Saving({
   onDelete,
 }) {
   const progressRef = useRef(null);
+  const [{ theme }] = useContext(ThemeContext);
 
   useEffect(() => {
     if (percentage === 100) {
@@ -33,30 +35,33 @@ function Saving({
   }, [progressRef, percentage]);
 
   return (
-    <section className="saving">
+    <section
+      className="saving"
+      style={{ backgroundColor: theme.backgroundColorSecondary }}
+    >
       <div className="saving-image">
         <img src={image} alt="saving" />
       </div>
       <div className="saving-details">
         <header className="saving-header">
-          <h3>{name}</h3>
+          <h3 style={{ color: theme.textColor }}>{name}</h3>
         </header>
         <div className="saving-information">
-          <p className="information">
+          <p className="information" style={{ color: theme.textColor }}>
             <BsTags size={22} /> Preço:{' '}
             {price.toLocaleString('pt-br', {
               style: 'currency',
               currency: 'BRL',
             })}
           </p>
-          <p className="information">
+          <p className="information" style={{ color: theme.textColor }}>
             <BsCoin size={22} /> Investimento:{' '}
             {investment.toLocaleString('pt-br', {
               style: 'currency',
               currency: 'BRL',
             })}
           </p>
-          <p className="information">
+          <p className="information" style={{ color: theme.textColor }}>
             <BsPercent size={22} /> Percentual de Investimento: {percentage} %
           </p>
           <div className="progress-actions">

@@ -4,21 +4,21 @@ import { useContext } from 'react';
 import { ThemeContext } from '../../../contexts/ThemeContext';
 import './styles.css';
 
-function Container({ children }) {
+function Content({ children }) {
   const [{ theme }] = useContext(ThemeContext);
 
   return (
-    <article
-      className="container"
-      style={{ backgroundColor: theme.backgroundColor, color: theme.color }}
+    <section
+      className="content"
+      style={{ backgroundColor: theme.backgroundColor }}
     >
       {children}
-    </article>
+    </section>
   );
 }
 
-export default Container;
+export default Content;
 
-Container.propTypes = {
+Content.propTypes = {
   children: PropTypes.node,
 };

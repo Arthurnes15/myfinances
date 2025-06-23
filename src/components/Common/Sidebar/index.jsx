@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {
   BsArrowLeftCircle,
   BsArrowRightCircle,
@@ -13,19 +13,20 @@ import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
+import { ThemeContext } from '../../../contexts/ThemeContext';
 import * as actions from '../../../store/modules/auth/actions';
+import ToggleTheme from '../../ToggleTheme';
 import logo from '../../../assets/images/logo.png';
 import './styles.css';
-import ToggleTheme from '../../ToggleTheme';
 
 function Sidebar() {
-  const dispatch = useDispatch();
-  const location = useLocation();
-
   const [open, setOpen] = useState(true);
   const [classOpen, setClassOpen] = useState('');
-
+  const dispatch = useDispatch();
+  const location = useLocation();
   const user = useSelector((state) => state.auth.user.username);
+
+  const [{ theme, isDark }] = useContext(ThemeContext);
 
   function handleOpenSidebar() {
     setClassOpen('open-sidebar');
@@ -43,7 +44,15 @@ function Sidebar() {
 
   return (
     <>
-      <nav id="sidebar" className={classOpen}>
+      <nav
+        id="sidebar"
+        className={classOpen}
+        style={{
+          backgroundColor: theme.backgroundColor,
+          borderRight: `1px solid ${theme.textColorSecondary}`,
+          color: theme.textColorSecondary,
+        }}
+      >
         <div id="sidebar_content">
           <div className="header">
             <div className="logo">
@@ -62,6 +71,7 @@ function Sidebar() {
           <ul id="side_items">
             <li
               className={clsx('side-item', {
+                ' dark': isDark,
                 ' active': location.pathname === '/spendings',
               })}
             >
@@ -72,6 +82,7 @@ function Sidebar() {
             </li>
             <li
               className={clsx('side-item', {
+                ' dark': isDark,
                 ' active': location.pathname === '/invoices',
               })}
             >
@@ -82,6 +93,7 @@ function Sidebar() {
             </li>
             <li
               className={clsx('side-item', {
+                ' dark': isDark,
                 ' active': location.pathname === '/savings',
               })}
             >
@@ -107,7 +119,7 @@ function Sidebar() {
           </button>
         </div>
 
-        <div id="logout">
+        <div id="logout" style={{ borderTop: `1px solid ${theme.textColor}` }}>
           <button id="logout_btn" onClick={handleLogout}>
             <BsBoxArrowRight size={30} />
             <span className="item-description">Sair</span>

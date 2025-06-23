@@ -2,12 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 .login_content {
   min-width: 30%;
-  margin-top: 100px;
   padding: 20px;
+  margin-bottom: 50px;
   border: 1px solid #ffffffc4;
   border-radius: 8px;
 }

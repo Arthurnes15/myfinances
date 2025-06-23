@@ -31,11 +31,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #252525;
   height: 100vh;
-  border-right: 1px solid rgba(255, 255, 255, 0.562);
-  border-left: 1px solid rgba(255, 255, 255, 0.562);
-  color: white;
   position: fixed;
   transition: all 0.5s;
   min-width: 93px;
@@ -64,12 +60,34 @@
   margin: 8px 0;
   padding: 10px;
   cursor: pointer;
+  border-radius: 10px;
+}
+
+.side-item a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #184c42;
+}
+
+.side-item.dark a {
+  color: white;
 }
 
 .side-item.active {
   background-color: #184c42;
   border: 1px solid white;
   border-radius: 10px;
+  color: white;
+}
+
+.side-item.active a {
+  color: white;
+}
+
+.side-item.active a svg {
+  color: white;
 }
 
 .side-item:hover:not(.active) {
@@ -78,16 +96,15 @@
   transition: 0.2s;
 }
 
-.side-item a {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.side-item:hover:not(.active) a {
+  color: white;
+}
+
+.side-item:hover:not(.active) a svg {
   color: white;
 }
 
 #logout {
-  border-top: 1px solid white;
   padding: 12px;
 }
 

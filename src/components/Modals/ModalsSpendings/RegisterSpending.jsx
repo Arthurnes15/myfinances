@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { date, number, object, string } from 'yup';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,6 +9,7 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 
 import { necessities } from '../../../utils/necessities';
+import { ThemeContext } from '../../../contexts/ThemeContext';
 import ModalComponent from '../../Common/Modal';
 import TextField from '../../Common/TextField';
 import Label from '../../Common/Label';
@@ -26,6 +28,7 @@ function ModalRegister({ open, close, setIsLoading }) {
     date: date().typeError('Data inválida'),
     necessity: string().required('Campo obrigatório'),
   });
+  const [{ theme }] = useContext(ThemeContext);
 
   const {
     control,
@@ -111,6 +114,14 @@ function ModalRegister({ open, close, setIsLoading }) {
                 name="necessity"
                 render={({ field: { onChange } }) => (
                   <Select
+                    styles={{
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        borderColor: state.isFocused
+                          ? `${theme.textColor}`
+                          : `${theme.textColorSecondary}`,
+                      }),
+                    }}
                     className="react-select-container"
                     options={necessities}
                     onChange={(e) => {

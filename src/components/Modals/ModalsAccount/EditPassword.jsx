@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { object, string } from 'yup';
 import { toast } from 'react-toastify';
 
+import { ThemeContext } from '../../../contexts/ThemeContext';
 import ModalComponent from '../../Common/Modal';
 import TextField from '../../Common/TextField';
 import Label from '../../Common/Label';
@@ -23,7 +25,7 @@ function ModalEditPassword({ open, close, setIsLoading }) {
       .min(6, 'Deve conter 6 caracteres no mínimo')
       .max(50, 'Deve conter 50 caracteres no máximo'),
   });
-
+  const [{ theme }] = useContext(ThemeContext);
   const {
     register,
     handleSubmit,
@@ -65,7 +67,11 @@ function ModalEditPassword({ open, close, setIsLoading }) {
           <form onSubmit={handleSubmit(handleEditPassword)}>
             <TextField errors={errors?.password?.message}>
               <Label htmlFor="password">
-                <SVGPadlock width="25px" height="25px" stroke="white" />
+                <SVGPadlock
+                  width="25px"
+                  height="25px"
+                  stroke={theme.textColor}
+                />
                 Nova Senha:
               </Label>
               <Input
@@ -76,7 +82,11 @@ function ModalEditPassword({ open, close, setIsLoading }) {
             </TextField>
             <TextField errors={errors?.passwordConfirmed?.message}>
               <Label htmlFor="passwordConfirmed">
-                <SVGPadlock width="25px" height="25px" stroke="white" />
+                <SVGPadlock
+                  width="25px"
+                  height="25px"
+                  stroke={theme.textColor}
+                />
                 Confirme a Senha:
               </Label>
               <Input

@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { string, object } from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { ThemeContext } from '../../contexts/ThemeContext';
 import * as actions from '../../store/modules/auth/actions';
 import Loading from '../../components/Loading';
 import TextField from '../../components/Common/TextField/index';
@@ -24,6 +25,7 @@ function Login() {
       .max(50, 'Deve conter no máximo 50 caracteres'),
     password: string().required('Campo obrigatório'),
   });
+  const [{ theme }] = useContext(ThemeContext);
 
   const {
     register,
@@ -47,15 +49,21 @@ function Login() {
   }, [isLoggedIn, navigate]);
 
   return (
-    <article className="login">
+    <article
+      className="login"
+      style={{ backgroundColor: theme.backgroundColor }}
+    >
       <Loading isLoading={isLoading} />
-      <section className="login_content">
+      <section
+        className="login_content"
+        style={{ border: `1px solid ${theme.textColor}` }}
+      >
         <header className="title">
           <div className="logo">
             <img src={logo} alt="logo" />
           </div>
           <div className="text">
-            <h1>MyFinances</h1>
+            <h1 style={{ color: theme.textColor }}>MyFinances</h1>
           </div>
         </header>
         <form onSubmit={handleSubmit(handleSubmitLogin)}>
@@ -79,7 +87,7 @@ function Login() {
           <ButtonSubmit>Entrar</ButtonSubmit>
 
           <div className="redirect">
-            <p>
+            <p style={{ color: theme.textColor }}>
               Não possui conta? <a href="/register-user">Cadastre-se</a>
             </p>
           </div>

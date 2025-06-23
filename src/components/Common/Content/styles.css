@@ -1,0 +1,12 @@
+.content {
+  margin-left: 100px;
+  padding: 50px 0px 0px 50px;
+}
+
+/* Cellphone size */
+@media (max-width: 540px) {
+  .content {
+    margin-left: 0px;
+    padding: 20px;
+  }
+}

@@ -1,21 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { BsPiggyBank } from 'react-icons/bs';
 import { get } from 'lodash';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
+import { ThemeContext } from '../../contexts/ThemeContext';
 import * as actions from '../../store/modules/auth/actions';
 import useVerifyUser from '../../hooks/useVerifyUser';
 import axiosClient from '../../config/axios';
 import Loading from '../../components/Loading';
 import Sidebar from '../../components/Common/Sidebar/index';
+import Container from '../../components/Common/Container';
 import Saving from '../../components/Saving';
 import BottomBar from '../../components/Common/BottomBar';
 import ModalRegister from '../../components/Modals/ModalsSavings/RegisterSaving';
 import ModalEdit from '../../components/Modals/ModalsSavings/EditSaving';
 import Header from '../../components/Common/Header';
 import HeaderMobile from '../../components/Common/HeaderMobile';
-import Container from '../../components/Common/Container';
+import Content from '../../components/Common/Content';
 import fund from '../../assets/images/fund.jpg';
 import './styles.css';
 
@@ -33,6 +35,7 @@ const Savings = () => {
   });
   const [idSaving, setIdSaving] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [{ theme }] = useContext(ThemeContext);
 
   function openRegisterModal() {
     setIsOpen(true);
@@ -87,7 +90,7 @@ const Savings = () => {
   }
 
   return (
-    <article>
+    <Container>
       <ModalRegister
         open={modalIsOpen}
         close={() => setIsOpen(false)}
@@ -107,9 +110,9 @@ const Savings = () => {
       <BottomBar />
       <Sidebar />
 
-      <Container>
+      <Content>
         <Header
-          icon={<BsPiggyBank size={35} />}
+          icon={<BsPiggyBank size={35} color={theme.textColorSecondary} />}
           title="Economias"
           onClick={openRegisterModal}
         />
@@ -128,8 +131,8 @@ const Savings = () => {
             />
           ))}
         </main>
-      </Container>
-    </article>
+      </Content>
+    </Container>
   );
 };
 

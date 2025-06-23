@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { boolean, number, object } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { ThemeContext } from '../../../contexts/ThemeContext';
 import ModalComponent from '../../Common/Modal';
 import Label from '../../Common/Label';
 import Button from '../../Common/Button';
@@ -21,6 +23,8 @@ function ModalInstallments({
     index: number(),
     checked: boolean(),
   });
+
+  const [{ theme }] = useContext(ThemeContext);
 
   const { control, setValue, handleSubmit } = useForm({
     resolver: yupResolver(schema),
@@ -91,7 +95,7 @@ function ModalInstallments({
           </div>
         ))}
 
-        <div className="restToPay">
+        <div className="restToPay" style={{ color: theme.textColor }}>
           Total a pagar:
           {' ' +
             restToPay?.toLocaleString('pt-br', {

@@ -1,9 +1,23 @@
+import PropTypes from 'prop-types';
+import { useContext } from 'react';
+
+import { ThemeContext } from '../../contexts/ThemeContext';
 import './styles.css';
 
 function ToggleTheme() {
+  const [, toggleTheme] = useContext(ThemeContext);
+
+  const toggle = localStorage.getItem('toggle');
+  const checked = toggle.includes('true') ? true : false;
+
   return (
     <label className="switch">
-      <input defaultChecked="true" id="checkbox" type="checkbox" />
+      <input
+        defaultChecked={checked}
+        id="checkbox"
+        type="checkbox"
+        onClick={toggleTheme}
+      />
       <span className="slider">
         <div className="star star_1" />
         <div className="star star_2" />
@@ -21,3 +35,7 @@ function ToggleTheme() {
 }
 
 export default ToggleTheme;
+
+ToggleTheme.propTypes = {
+  checked: PropTypes.bool,
+};

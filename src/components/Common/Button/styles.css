@@ -1,8 +1,6 @@
 .insert {
   margin-left: 15px;
   padding: 0px 5px;
-  background-color: #313131;
-  border: 1px solid white;
   border-radius: 3px;
   cursor: pointer;
 }

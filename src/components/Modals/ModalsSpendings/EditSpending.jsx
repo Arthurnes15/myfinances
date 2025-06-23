@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { date as dateYup, number, object, string } from 'yup';
@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
 import { necessities } from '../../../utils/necessities';
+import { ThemeContext } from '../../../contexts/ThemeContext';
 import ModalComponent from '../../Common/Modal';
 import TextField from '../../Common/TextField';
 import Label from '../../Common/Label';
@@ -26,6 +27,7 @@ function ModalEdit({ open, close, setIsLoading, idSpending, spendingData }) {
   const indexNecessity = necessities.findIndex(
     (value) => value.value === necessity
   );
+  const [{ theme }] = useContext(ThemeContext);
   const user = useSelector((state) => state.auth.user.email);
   const dateSpending = date.split('T')[0];
 
@@ -126,6 +128,14 @@ function ModalEdit({ open, close, setIsLoading, idSpending, spendingData }) {
               render={({ field: { onChange } }) => (
                 <Select
                   className="react-select-container"
+                  styles={{
+                    control: (baseStyles, state) => ({
+                      ...baseStyles,
+                      borderColor: state.isFocused
+                        ? `${theme.textColor}`
+                        : `${theme.textColorSecondary}`,
+                    }),
+                  }}
                   options={necessities}
                   onChange={(e) => {
                     onChange(e.value);

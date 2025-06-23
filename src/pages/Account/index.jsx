@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   BsBoxArrowLeft,
@@ -7,10 +7,12 @@ import {
   BsPersonCircle,
 } from 'react-icons/bs';
 
+import { ThemeContext } from '../../contexts/ThemeContext';
 import * as actions from '../../store/modules/auth/actions';
 import useVerifyUser from '../../hooks/useVerifyUser';
 import HeaderMobile from '../../components/Common/HeaderMobile';
 import BottomBar from '../../components/Common/BottomBar';
+import Container from '../../components/Common/Container';
 import ModalEditPassword from '../../components/Modals/ModalsAccount/EditPassword';
 import SVGPadlock from '../../assets/svgs/svg-padlock';
 import Loading from '../../components/Loading';
@@ -21,6 +23,7 @@ function Account() {
   const { username, email } = useSelector((state) => state.auth.user);
   const [isOpen, setIsOpen] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [{ theme }] = useContext(ThemeContext);
   const dispatch = useDispatch();
 
   function handleLogout() {
@@ -28,7 +31,7 @@ function Account() {
   }
 
   return (
-    <article>
+    <Container>
       <Loading isLoading={isLoading} />
       <HeaderMobile />
       <BottomBar />
@@ -40,34 +43,45 @@ function Account() {
       />
 
       <div className="header-account">
-        <BsPersonCircle size={30} />
-        <h1>Seus dados pessoais</h1>
+        <BsPersonCircle size={30} color={theme.textColorSecondary} />
+        <h1 style={{ color: theme.textColorSecondary }}>Seus dados pessoais</h1>
       </div>
 
       <div className="private-data">
         <div className="data">
           <span>
-            <BsPerson size={25} color="white" />
+            <BsPerson size={25} color={theme.textColorSecondary} />
           </span>
           <div className="data-content">
-            <span>Nome de Usuário: </span>
-            <span>{username}</span>
+            <span style={{ color: theme.textColorSecondary }}>
+              Nome de Usuário:
+            </span>
+            <span style={{ color: theme.textColorSecondary }}>{username}</span>
           </div>
         </div>
         <div className="data">
           <span>
-            <BsEnvelopeAt size={25} color="white" />
+            <BsEnvelopeAt size={25} color={theme.textColorSecondary} />
           </span>
           <div className="data-content">
-            <span>Email: </span>
-            <span>{email}</span>
+            <span style={{ color: theme.textColorSecondary }}>Email: </span>
+            <span style={{ color: theme.textColorSecondary }}>{email}</span>
           </div>
         </div>
         <div className="data">
           <span>
-            <SVGPadlock width="25px" height="25px" stroke="white" />
+            <SVGPadlock
+              width="25px"
+              height="25px"
+              stroke={theme.textColorSecondary}
+            />
           </span>
-          <span onClick={() => setIsOpen(true)}>Alterar Senha</span>
+          <span
+            style={{ color: theme.textColorSecondary }}
+            onClick={() => setIsOpen(true)}
+          >
+            Alterar Senha
+          </span>
         </div>
         <div className="data">
           <span>
@@ -78,7 +92,7 @@ function Account() {
           </span>
         </div>
       </div>
-    </article>
+    </Container>
   );
 }
 
