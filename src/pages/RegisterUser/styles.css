@@ -1,13 +1,14 @@
 .register-user {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .register-user-content {
   min-width: 30%;
-  margin-top: 100px;
   padding: 20px;
-  border: 1px solid #ffffffc4;
+  margin-bottom: 50px;
   border-radius: 8px;
 }
 
@@ -47,4 +48,14 @@
   font-size: 16px;
   margin: 20px 0 15px 0;
   padding: 8px;
+}
+
+@media (max-width: 540px) {
+  .register-user-content {
+    width: 300px;
+  }
+
+  .title-user h1 {
+    font-size: 28px;
+  }
 }

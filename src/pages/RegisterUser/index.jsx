@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -13,6 +13,7 @@ import Loading from '../../components/Loading';
 import Label from '../../components/Common/Label';
 import axiosClient from '../../config/axios';
 import './styles.css';
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 function RegisterUser() {
   const schema = object({
@@ -31,7 +32,7 @@ function RegisterUser() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
+  const [{ theme }] = useContext(ThemeContext);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -54,15 +55,24 @@ function RegisterUser() {
   }
 
   return (
-    <article className="register-user">
+    <article
+      className="register-user"
+      style={{ backgroundColor: theme.backgroundColor }}
+    >
       <Loading isLoading={isLoading} />
-      <section className="register-user-content">
+
+      <section
+        className="register-user-content"
+        style={{ border: `1px solid ${theme.textColorSecondary}` }}
+      >
         <header className="header-user">
           <div className="logo">
             <img src={logo} alt="logo" />
           </div>
           <div className="title-user">
-            <h1>Cadastrar Usuário</h1>
+            <h1 style={{ color: theme.textColorSecondary }}>
+              Cadastrar Usuário
+            </h1>
           </div>
         </header>
         <form onSubmit={handleSubmit(handleSubmitUser)}>

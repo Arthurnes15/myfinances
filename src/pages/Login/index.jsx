@@ -56,14 +56,14 @@ function Login() {
       <Loading isLoading={isLoading} />
       <section
         className="login_content"
-        style={{ border: `1px solid ${theme.textColor}` }}
+        style={{ border: `1px solid ${theme.textColorSecondary}` }}
       >
         <header className="title">
           <div className="logo">
             <img src={logo} alt="logo" />
           </div>
           <div className="text">
-            <h1 style={{ color: theme.textColor }}>MyFinances</h1>
+            <h1 style={{ color: theme.textColorSecondary }}>MyFinances</h1>
           </div>
         </header>
         <form onSubmit={handleSubmit(handleSubmitLogin)}>
