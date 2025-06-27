@@ -30,6 +30,8 @@ function ModalComponent({
         onRequestClose={close}
         contentLabel={content}
         overlayClassName="modal-overlay"
+        ariaHideApp={false}
+        //TODO: Mais propriedades de acessibilidade
       >
         <header className="header-modal">
           <h1 style={{ color: theme.textColor }}>{title}</h1>

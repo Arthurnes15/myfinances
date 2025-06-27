@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { object, string } from 'yup';
 
+import { ThemeContext } from '../../contexts/ThemeContext';
 import TextField from '../../components/Common/TextField';
 import Input from '../../components/Common/Input';
 import ButtonSubmit from '../../components/Common/ButtonSubmit';
@@ -13,7 +14,6 @@ import Loading from '../../components/Loading';
 import Label from '../../components/Common/Label';
 import axiosClient from '../../config/axios';
 import './styles.css';
-import { ThemeContext } from '../../contexts/ThemeContext';
 
 function RegisterUser() {
   const schema = object({
@@ -22,7 +22,10 @@ function RegisterUser() {
       .email('Deve conter @')
       .required('Campo obrigatório')
       .max(50, 'Deve conter no máximo 50 caracteres'),
-    password: string().required('Campo obrigatório'),
+    password: string()
+      .required('Campo obrigatório')
+      .min(6, 'A senha deve conter no mínimo 6 caracteres')
+      .max(50, 'A senha deve conter no máximo 50 caracteres '),
   });
 
   const {
@@ -39,14 +42,20 @@ function RegisterUser() {
   async function handleSubmitUser(data) {
     setIsLoading(true);
     try {
-      await axiosClient.post('users', {
-        username: data.username,
-        email: data.email,
-        password: data.password,
-      });
+      await axiosClient
+        .post('users', {
+          username: data.username,
+          email: data.email,
+          password: data.password,
+        })
+        .then(() => {
+          navigate('/');
+          toast.success('Usuário criado com sucesso');
+        })
+        .catch((err) => {
+          toast.error(err.response.data.errors[0]);
+        });
       setIsLoading(false);
-      navigate('/');
-      toast.success('Usuário criado com sucesso');
     } catch (error) {
       setIsLoading(false);
       toast.error('Ocorreu um erro, tente novamente');

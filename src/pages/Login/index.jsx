@@ -13,6 +13,7 @@ import Label from '../../components/Common/Label';
 import Input from '../../components/Common/Input';
 import ButtonSubmit from '../../components/Common/ButtonSubmit';
 import logo from '../../assets/images/logo.png';
+import ToggleTheme from '../../components/ToggleTheme';
 import './styles.css';
 
 function Login() {
@@ -85,6 +86,10 @@ function Login() {
           </TextField>
 
           <ButtonSubmit>Entrar</ButtonSubmit>
+
+          <div className="toggle">
+            <ToggleTheme />
+          </div>
 
           <div className="redirect">
             <p style={{ color: theme.textColor }}>

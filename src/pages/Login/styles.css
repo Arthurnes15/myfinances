@@ -32,6 +32,10 @@
   color: white;
 }
 
+.toggle {
+  padding-top: 10px;
+}
+
 .redirect {
   display: flex;
   justify-content: center;
