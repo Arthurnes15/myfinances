@@ -1,7 +1,8 @@
 .image-preview {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding: 8px 0;
 }
 
 .image-preview .image-content {
@@ -15,23 +16,29 @@
   height: 25px;
   margin: 10px;
   padding: 5px;
-  right: 80px;
+  right: 115px;
 }
 
 .remove-photo button {
   background-color: transparent;
   border: none;
   color: rgb(238, 64, 64);
+  cursor: pointer;
 }
 
 .image-content .remove-photo:hover{
   background-color: rgba(0, 0, 0, 0.219);
   border-radius: 20px;
-  transition: 0.2s;
 }
 
 .image-preview .image-content img {
   width: 100%;
   height: 100%;
   border-radius: 10px;
+}
+
+@media (max-width: 540px) {
+  .image-content .remove-photo {
+    right: 40px;
+  }
 }

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { mixed, number, object, string } from 'yup';
 import { BsCoin, BsPiggyBank, BsTags, BsXLg } from 'react-icons/bs';
+import { toast } from 'react-toastify';
 
 import { convertToBase64 } from '../../../utils/convertToBase64';
 import TextField from '../../Common/TextField';
@@ -48,21 +49,27 @@ function ModalRegister({ open, close, setIsLoading }) {
 
   function handleClearInputFile() {
     setImgUrl('');
-
     inputRef.current.value = '';
+    setValue('image', '');
   }
 
   async function handleFileUpload(event) {
     const file = event.target.files[0];
+    const maxSizeImage = import.meta.env.VITE_MAX_SIZE_IMAGE;
 
     if (!file) {
       setImgUrl('');
       return;
     }
 
-    setImgUrl(URL.createObjectURL(file));
+    if (file?.size > maxSizeImage) {
+      toast.error('Imagem maior que 1MB');
+      setIsLoading(false);
+      setImgUrl('');
+      return;
+    }
 
-    // TODO: Validar tamanho da imagem
+    setImgUrl(URL.createObjectURL(file));
 
     setValue('image', file);
   }
@@ -70,9 +77,10 @@ function ModalRegister({ open, close, setIsLoading }) {
   async function handleSubmitSaving(data) {
     try {
       setIsLoading(true);
-
       const image =
-        typeof data.image === 'object' ? await convertToBase64(data.image) : '';
+        typeof data.image === 'object'
+          ? await convertToBase64(data.image)
+          : null;
 
       await axiosClient.post('savings', {
         name: data.name,
@@ -81,12 +89,13 @@ function ModalRegister({ open, close, setIsLoading }) {
         image,
         user,
       });
+      document.location.reload();
       setIsLoading(false);
       close();
-      document.location.reload();
     } catch (err) {
       console.error(err);
       setIsLoading(false);
+      toast.success('Erro ao salvar economia');
     }
   }
 
@@ -113,29 +122,7 @@ function ModalRegister({ open, close, setIsLoading }) {
                   onChange={handleFileUpload}
                 />
               )}
-            ></Controller>
-
-            <TextField>
-              <ImageUpload onClick={handleOpenFile} />
-            </TextField>
-
-            {!!imgUrl && (
-              <section className="image-preview">
-                <div className="image-content">
-                  <div className="remove-photo">
-                    <button
-                      type="button"
-                      title="Remover Imagem"
-                      onClick={handleClearInputFile}
-                    >
-                      <BsXLg size={25} />
-                    </button>
-                  </div>
-
-                  <img src={imgUrl} alt="image" />
-                </div>
-              </section>
-            )}
+            />
 
             <TextField errors={errors?.name?.message}>
               <Label htmlFor="saving">
@@ -172,6 +159,28 @@ function ModalRegister({ open, close, setIsLoading }) {
                 register={register('investment')}
               />
             </TextField>
+
+            <TextField>
+              <ImageUpload onClick={handleOpenFile} />
+            </TextField>
+
+            {!!imgUrl && (
+              <section className="image-preview">
+                <div className="image-content">
+                  <div className="remove-photo">
+                    <button
+                      type="button"
+                      title="Remover Imagem"
+                      onClick={handleClearInputFile}
+                    >
+                      <BsXLg size={25} />
+                    </button>
+                  </div>
+
+                  <img src={imgUrl} alt="image" />
+                </div>
+              </section>
+            )}
 
             <ButtonSubmit>Cadastrar</ButtonSubmit>
           </form>

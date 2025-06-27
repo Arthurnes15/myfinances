@@ -1,3 +1,4 @@
+// TODO: Configurar paleta
 export const themes = {
   light: {
     backgroundColor: '#f7f7f7',

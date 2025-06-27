@@ -2,10 +2,12 @@
   display: flex;
   justify-content: center;
   gap: 5px;
-  background-color: #184c42;
+  background-color: #118C46;
   font-family: 'Poppins';
   padding: 10px;
   border-radius: 10px;
   border: none;
   color: white;
+  margin: 10px 0;
+  cursor: pointer;
 }

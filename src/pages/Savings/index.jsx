@@ -79,12 +79,13 @@ const Savings = () => {
   }, [dispatch]);
 
   function openEditModal(saving) {
-    const { _id, name, price, investment } = saving;
+    const { _id, name, price, investment, image } = saving;
     setEditIsOpen(true);
     setSavingData({
       name,
       price,
       investment,
+      image,
     });
     setIdSaving(_id);
   }
