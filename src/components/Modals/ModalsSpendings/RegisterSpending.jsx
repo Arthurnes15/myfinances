@@ -50,7 +50,7 @@ function ModalRegister({ open, close, setIsLoading }) {
         user,
       });
       setIsLoading(false);
-      close;
+      close();
       document.location.reload();
       toast.success('Gasto salvo com sucesso');
     } catch (err) {
