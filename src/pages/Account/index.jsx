@@ -10,9 +10,12 @@ import {
 import { ThemeContext } from '../../contexts/ThemeContext';
 import * as actions from '../../store/modules/auth/actions';
 import useVerifyUser from '../../hooks/useVerifyUser';
+import Sidebar from '../../components/Common/Sidebar';
+import Header from '../../components/Common/Header';
 import HeaderMobile from '../../components/Common/HeaderMobile';
 import BottomBar from '../../components/Common/BottomBar';
 import Container from '../../components/Common/Container';
+import Content from '../../components/Common/Content';
 import ModalEditPassword from '../../components/Modals/ModalsAccount/EditPassword';
 import SVGPadlock from '../../assets/svgs/svg-padlock';
 import Loading from '../../components/Loading';
@@ -34,6 +37,7 @@ function Account() {
     <Container>
       <Loading isLoading={isLoading} />
       <HeaderMobile />
+      <Sidebar />
       <BottomBar />
 
       <ModalEditPassword
@@ -42,56 +46,63 @@ function Account() {
         setIsLoading={setIsLoading}
       />
 
-      <div className="header-account">
-        <BsPersonCircle size={30} color={theme.textColorSecondary} />
-        <h1 style={{ color: theme.textColorSecondary }}>Seus dados pessoais</h1>
-      </div>
-
-      <div className="private-data">
-        <div className="data">
-          <span>
-            <BsPerson size={25} color={theme.textColorSecondary} />
-          </span>
-          <div className="data-content">
-            <span style={{ color: theme.textColorSecondary }}>
-              Nome de Usuário:
+      <Content>
+        <Header
+          icon={<BsPersonCircle size={30} color={theme.textColorSecondary} />}
+          title="Seus Dados Pessoais"
+          styleButton={{ display: 'none' }}
+        />
+        <div className="private-data">
+          <div
+            className="data"
+            style={{ backgroundColor: theme.backgroundColorSecondary }}
+          >
+            <span>
+              <BsPerson size={50} color={theme.textColorSecondary} />
             </span>
-            <span style={{ color: theme.textColorSecondary }}>{username}</span>
+            <div className="data-content">
+              <span style={{ color: theme.textColorSecondary }}>
+                Nome de Usuário:
+              </span>
+              <span style={{ color: theme.textColorSecondary }}>
+                {username}
+              </span>
+            </div>
           </div>
-        </div>
-        <div className="data">
-          <span>
-            <BsEnvelopeAt size={25} color={theme.textColorSecondary} />
-          </span>
-          <div className="data-content">
-            <span style={{ color: theme.textColorSecondary }}>Email: </span>
-            <span style={{ color: theme.textColorSecondary }}>{email}</span>
+          <div
+            className="data"
+            style={{ backgroundColor: theme.backgroundColorSecondary }}
+          >
+            <span>
+              <BsEnvelopeAt size={50} color={theme.textColorSecondary} />
+            </span>
+            <div className="data-content">
+              <span style={{ color: theme.textColorSecondary }}>Email: </span>
+              <span style={{ color: theme.textColorSecondary }}>{email}</span>
+            </div>
           </div>
-        </div>
-        <div className="data">
-          <span>
-            <SVGPadlock
-              width="25px"
-              height="25px"
-              stroke={theme.textColorSecondary}
-            />
-          </span>
-          <span
-            style={{ color: theme.textColorSecondary }}
+          <div
+            className="data"
+            style={{ backgroundColor: theme.backgroundColorSecondary }}
             onClick={() => setIsOpen(true)}
           >
-            Alterar Senha
-          </span>
+            <span>
+              <SVGPadlock
+                width="50px"
+                height="50px"
+                stroke={theme.textColorSecondary}
+              />
+            </span>
+            <span style={{ color: theme.textColorSecondary }}>
+              Alterar Senha
+            </span>
+          </div>
+          <div className="logout" onClick={handleLogout}>
+            <BsBoxArrowLeft size={50} />
+            <span>Sair</span>
+          </div>
         </div>
-        <div className="data">
-          <span>
-            <BsBoxArrowLeft size={25} color="red" />
-          </span>
-          <span style={{ color: 'red' }} onClick={handleLogout}>
-            Sair
-          </span>
-        </div>
-      </div>
+      </Content>
     </Container>
   );
 }

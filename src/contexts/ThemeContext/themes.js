@@ -1,7 +1,7 @@
 // TODO: Configurar paleta
 export const themes = {
   light: {
-    backgroundColor: '#f7f7f7',
+    backgroundColor: '#F2F2F2',
     backgroundColorSecondary: '#FFF',
     textColor: '#252525',
     textColorSecondary: '#184C42',

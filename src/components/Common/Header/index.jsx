@@ -6,7 +6,7 @@ import { ThemeContext } from '../../../contexts/ThemeContext';
 import Button from '../Button';
 import './styles.css';
 
-function Header({ icon, title, onClick }) {
+function Header({ icon, title, onClick, styleButton }) {
   const [{ theme }] = useContext(ThemeContext);
 
   return (
@@ -19,6 +19,7 @@ function Header({ icon, title, onClick }) {
           style={{
             backgroundColor: theme.backgroundColor,
             border: `1px solid ${theme.textColorSecondary}`,
+            ...styleButton,
           }}
           type="button"
           onClick={onClick}
@@ -36,4 +37,5 @@ Header.propTypes = {
   icon: PropTypes.element,
   title: PropTypes.string,
   onClick: PropTypes.func,
+  styleButton: PropTypes.object,
 };

@@ -153,6 +153,17 @@
   height: 0px;
 }
 
+#user div {
+  padding: 5px;
+  border-radius: 8px;
+}
+
+#user div a {
+  display: flex;
+  gap: 5px;
+  text-decoration: none;
+}
+
 #sidebar.open-sidebar {
   min-width: 20%;
   z-index: 10;

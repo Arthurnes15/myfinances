@@ -62,10 +62,14 @@ function Sidebar() {
             <ToggleTheme />
           </div>
           <div id="user">
-            <BsPersonCircle size={24} />
-            <p id="user_infos">
-              <span className="item-description">{user}</span>
-            </p>
+            <div style={{ backgroundColor: theme.backgroundColorSecondary }}>
+              <Link to="/account" style={{ color: theme.textColorSecondary }}>
+                <BsPersonCircle size={24} />
+                <p id="user_info">
+                  <span className="item-description">{user}</span>
+                </p>
+              </Link>
+            </div>
           </div>
 
           <ul id="side_items">
