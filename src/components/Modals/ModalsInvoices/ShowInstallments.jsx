@@ -68,7 +68,7 @@ function ModalInstallments({
 
   return (
     <ModalComponent
-      title="Meses da Fatura"
+      title="Meses das Parcelas"
       open={open}
       close={close}
       id="notEnough"
