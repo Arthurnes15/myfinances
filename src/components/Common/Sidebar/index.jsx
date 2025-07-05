@@ -64,7 +64,7 @@ function Sidebar() {
           <div id="user">
             <div style={{ backgroundColor: theme.backgroundColorSecondary }}>
               <Link to="/account" style={{ color: theme.textColorSecondary }}>
-                <BsPersonCircle size={24} />
+                <BsPersonCircle size={20} />
                 <p id="user_info">
                   <span className="item-description">{user}</span>
                 </p>

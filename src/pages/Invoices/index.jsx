@@ -14,6 +14,7 @@ import ModalInstallments from '../../components/Modals/ModalsInvoices/ShowInstal
 import ModalRegister from '../../components/Modals/ModalsInvoices/RegiterInvoice';
 import Content from '../../components/Common/Content';
 import HeaderMobile from '../../components/Common/HeaderMobile';
+import PlaceholderHeading from '../../components/Common/PlaceholderHeading';
 import './styles.css';
 
 const Invoices = () => {
@@ -83,17 +84,21 @@ const Invoices = () => {
           onClick={() => setIsRegisterOpen(true)}
         />
 
-        <main className="all-invoices">
-          {invoices.map((invoice, index) => (
-            <Invoice
-              key={index}
-              item={invoice.item}
-              status={invoice.status}
-              installmentsValue={invoice.installmentsValue}
-              onClick={() => openInvoice(invoice)}
-            />
-          ))}
-        </main>
+        {invoices.length === 0 ? (
+          <PlaceholderHeading text="Você ainda não adicionou items a sua fatura" />
+        ) : (
+          <main className="all-invoices">
+            {invoices.map((invoice, index) => (
+              <Invoice
+                key={index}
+                item={invoice.item}
+                status={invoice.status}
+                installmentsValue={invoice.installmentsValue}
+                onClick={() => openInvoice(invoice)}
+              />
+            ))}
+          </main>
+        )}
       </Content>
     </Container>
   );

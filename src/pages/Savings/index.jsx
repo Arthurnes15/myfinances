@@ -17,6 +17,7 @@ import ModalRegister from '../../components/Modals/ModalsSavings/RegisterSaving'
 import ModalEdit from '../../components/Modals/ModalsSavings/EditSaving';
 import Header from '../../components/Common/Header';
 import HeaderMobile from '../../components/Common/HeaderMobile';
+import PlaceholderHeading from '../../components/Common/PlaceholderHeading';
 import Content from '../../components/Common/Content';
 import fund from '../../assets/images/fund.jpg';
 import './styles.css';
@@ -118,20 +119,24 @@ const Savings = () => {
           onClick={openRegisterModal}
         />
 
-        <main className="all-savings">
-          {savings.map((saving, index) => (
-            <Saving
-              key={index}
-              image={saving.image || fund}
-              name={saving.name}
-              price={saving.price}
-              investment={saving.investment}
-              percentage={saving.percentage}
-              onEdit={() => openEditModal(saving)}
-              onDelete={(e) => handleDelete(e, saving._id, index)}
-            />
-          ))}
-        </main>
+        {savings.length === 0 ? (
+          <PlaceholderHeading text="Você ainda não adicionou nenhuma economia" />
+        ) : (
+          <main className="all-savings">
+            {savings.map((saving, index) => (
+              <Saving
+                key={index}
+                image={saving.image || fund}
+                name={saving.name}
+                price={saving.price}
+                investment={saving.investment}
+                percentage={saving.percentage}
+                onEdit={() => openEditModal(saving)}
+                onDelete={(e) => handleDelete(e, saving._id, index)}
+              />
+            ))}
+          </main>
+        )}
       </Content>
     </Container>
   );

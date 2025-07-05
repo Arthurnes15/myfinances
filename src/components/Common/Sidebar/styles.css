@@ -158,8 +158,13 @@
   border-radius: 8px;
 }
 
+#user_info span {
+  font-size: 13px;
+}
+
 #user div a {
   display: flex;
+  align-items: center;
   gap: 5px;
   text-decoration: none;
 }

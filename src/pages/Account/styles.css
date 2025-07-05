@@ -17,6 +17,10 @@
   box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.384);
 }
 
+.private-data .data span {
+  word-break: break-all;
+}
+
 .private-data .logout {
   width: 210px;
   height: 130px;
@@ -43,8 +47,6 @@
   flex-direction: column;
   justify-content: center;
 }
-
-
 
 /* Tablet size */
 @media (max-width: 1024px) {
@@ -83,7 +85,7 @@
   .private-data .data {
     width: 130px;
     height: 120px;
-    font-size: 14px;
+    font-size: 13px;
     margin-bottom: 10px;
   }
 
@@ -91,6 +93,6 @@
     display: flex;
     width: 130px;
     height: 120px;
-    font-size: 14px;
+    font-size: 13px;
   }
 }
