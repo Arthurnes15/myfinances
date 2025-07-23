@@ -34,3 +34,9 @@
   background-color: #953c3c;
   transition: 0.3s;
 }
+
+@media (max-width: 540px) {
+  .insert {
+    margin-left: 5px;
+  }
+}

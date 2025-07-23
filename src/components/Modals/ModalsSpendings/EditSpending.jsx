@@ -22,8 +22,14 @@ import Input from '../../Common/Input';
 import ButtonSubmit from '../../Common/ButtonSubmit';
 import axiosClient from '../../../config/axios';
 
-function ModalEdit({ open, close, setIsLoading, idSpending, spendingData }) {
-  const { item, cost, date, necessity } = spendingData;
+function ModalEdit({
+  open,
+  close,
+  setIsLoading,
+  idSpending,
+  spendingDataToBeUpdated,
+}) {
+  const { item, cost, date, necessity } = spendingDataToBeUpdated;
   const indexNecessity = necessities.findIndex(
     (value) => value.value === necessity
   );
@@ -161,5 +167,5 @@ ModalEdit.propTypes = {
   close: PropTypes.func,
   setIsLoading: PropTypes.func,
   idSpending: PropTypes.string,
-  spendingData: PropTypes.object,
+  spendingDataToBeUpdated: PropTypes.object,
 };

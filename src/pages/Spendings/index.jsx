@@ -1,6 +1,10 @@
-import { BsWallet } from 'react-icons/bs';
-import { useContext, useState } from 'react';
+import { BsSearch, BsWallet } from 'react-icons/bs';
+import { useContext, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { get } from 'lodash';
 
+import * as actions from '../../store/modules/auth/actions';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import useVerifyUser from '../../hooks/useVerifyUser';
 import Sidebar from '../../components/Common/Sidebar';
@@ -13,32 +17,86 @@ import SpendingsTable from '../../components/SpendingsTable';
 import Header from '../../components/Common/Header';
 import Content from '../../components/Common/Content';
 import HeaderMobile from '../../components/Common/HeaderMobile';
+import axiosClient from '../../config/axios';
+import './styles.css';
 
 function Spendings() {
   useVerifyUser();
 
+  const [spendings, setSpendings] = useState([]);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalEditIsOpen, setEditIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [spendingData, setSpendingData] = useState({
+  // TODO: Mudar nome para spendingToBeUpdated
+  const [spendingToBeUpdated, setSpendingDataToBeUpdated] = useState({
     id: '',
     item: '',
     cost: 0,
     date: '',
   });
   const [idSpending, setIdSpending] = useState('');
+  const [searchValue, setSearchValue] = useState('');
   const [{ theme }] = useContext(ThemeContext);
+  const filteredSpendings = searchValue
+    ? spendings.filter((spending) => {
+        return spending.item.toLowerCase().includes(searchValue.toLowerCase());
+      })
+    : spendings;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        setIsLoading(true);
+
+        const response = await axiosClient.get('/spendings');
+        setSpendings(response.data);
+
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        const status = get(error, 'response.status', 0);
+        if (status === 401) {
+          dispatch(actions.loginFailure());
+        }
+        console.error(error);
+      }
+    }
+    getData();
+  }, [dispatch, setIsLoading]);
+
+  async function handleDelete(e, id, index) {
+    e.persist();
+    try {
+      setIsLoading(true);
+      await axiosClient.delete(`/spendings/${id}`);
+      const newSpendings = [...spendings];
+      newSpendings.splice(index, 1);
+      setSpendings(newSpendings);
+      setIsLoading(false);
+      toast.success('Gasto excluído com sucesso');
+    } catch (err) {
+      console.log('Erro desconhecido', err);
+      setIsLoading(false);
+    }
+  }
 
   function openEditModal(spending) {
     const { _id, item, cost, date, necessity } = spending;
     setEditIsOpen(true);
-    setSpendingData({
+    setSpendingDataToBeUpdated({
       item,
       cost,
       date,
       necessity,
     });
     setIdSpending(_id);
+  }
+
+  function handleSearchSpendings(e) {
+    const { value } = e.target;
+    setSearchValue(value);
   }
 
   return (
@@ -54,7 +112,7 @@ function Spendings() {
         close={() => setEditIsOpen(false)}
         setIsLoading={setIsLoading}
         idSpending={idSpending}
-        spendingData={spendingData}
+        spendingDataToBeUpdated={spendingToBeUpdated}
       />
 
       <Loading isLoading={isLoading} />
@@ -63,16 +121,32 @@ function Spendings() {
       <BottomBar />
 
       <Content>
-        <Header
-          icon={<BsWallet size={35} color={theme.textColorSecondary} />}
-          title="Gastos"
-          onClick={() => setIsOpen(true)}
-        />
+        <div className="header-spendings">
+          <Header
+            icon={<BsWallet size={35} color={theme.textColorSecondary} />}
+            title="Gastos"
+            onClick={() => setIsOpen(true)}
+          />
 
-        <SpendingsTable
-          setIsLoading={setIsLoading}
-          openEditModal={openEditModal}
-        />
+          <div className="search-bar">
+            <div className="icon">
+              <BsSearch size={20} />
+            </div>
+            <input
+              type="search"
+              placeholder="Buscar um gasto"
+              value={searchValue}
+              onChange={handleSearchSpendings}
+            />
+          </div>
+        </div>
+        {filteredSpendings.length > 0 && (
+          <SpendingsTable
+            spendings={filteredSpendings}
+            handleDelete={handleDelete}
+            openEditModal={openEditModal}
+          />
+        )}
       </Content>
     </Container>
   );

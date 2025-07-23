@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
-import { useContext, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useContext } from 'react';
 import {
   BsBookmarkStar,
   BsCalendarWeek,
@@ -9,58 +8,15 @@ import {
   BsTag,
   BsTrashFill,
 } from 'react-icons/bs';
-import { get } from 'lodash';
-import { toast } from 'react-toastify';
 
 import { dateFormatter } from '../../utils/dataFormatter';
 import { ThemeContext } from '../../contexts/ThemeContext';
-import * as actions from '../../store/modules/auth/actions';
 import PlaceholderHeading from '../Common/PlaceholderHeading';
 import Button from '../Common/Button';
-import axiosClient from '../../config/axios';
 import './styles.css';
 
-function SpendingsTable({ setIsLoading, openEditModal }) {
-  const [spendings, setSpendings] = useState([]);
+function SpendingsTable({ spendings, openEditModal, handleDelete }) {
   const [{ theme }] = useContext(ThemeContext);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    async function getData() {
-      try {
-        setIsLoading(true);
-
-        const response = await axiosClient.get('/spendings');
-        setSpendings(response.data);
-
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        const status = get(error, 'response.status', 0);
-        if (status === 401) {
-          dispatch(actions.loginFailure());
-        }
-        console.error(error);
-      }
-    }
-    getData();
-  }, [dispatch, setIsLoading]);
-
-  async function handleDelete(e, id, index) {
-    e.persist();
-    try {
-      setIsLoading(true);
-      await axiosClient.delete(`/spendings/${id}`);
-      const newSpendings = [...spendings];
-      newSpendings.splice(index, 1);
-      setSpendings(newSpendings);
-      setIsLoading(false);
-      toast.success('Gasto excluído com sucesso');
-    } catch {
-      console.log('Erro');
-      setIsLoading(false);
-    }
-  }
 
   return (
     <main className="all-spendings">
@@ -165,6 +121,7 @@ function SpendingsTable({ setIsLoading, openEditModal }) {
 export default SpendingsTable;
 
 SpendingsTable.propTypes = {
-  setIsLoading: PropTypes.func,
+  spendings: PropTypes.array,
+  handleDelete: PropTypes.func,
   openEditModal: PropTypes.func,
 };
