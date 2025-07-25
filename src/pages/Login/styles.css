@@ -18,32 +18,18 @@
   transition: 0.5s;
 }
 
-.title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-
-.text h1 {
-  font-family: 'SerifDisplay';
-  font-weight: 400;
-  font-size: 35px;
-  color: white;
-}
-
 .toggle {
   padding-top: 10px;
 }
 
-.redirect {
+.redirect-register {
   display: flex;
   justify-content: center;
   margin: 20px 0 15px 0;
   color: white;
 }
 
-.redirect a {
+.redirect-register a, .redirect-forgot a{
   color: #257464;
 }
 

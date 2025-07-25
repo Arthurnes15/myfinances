@@ -9,11 +9,12 @@ import { ThemeContext } from '../../contexts/ThemeContext';
 import TextField from '../../components/Common/TextField';
 import Input from '../../components/Common/Input';
 import ButtonSubmit from '../../components/Common/ButtonSubmit';
-import logo from '../../assets/images/logo.png';
 import Loading from '../../components/Loading';
 import Label from '../../components/Common/Label';
+import HeaderInitial from '../../components/Common/HeaderInitial';
 import axiosClient from '../../config/axios';
 import './styles.css';
+import ToggleTheme from '../../components/ToggleTheme';
 
 function RegisterUser() {
   const schema = object({
@@ -74,16 +75,8 @@ function RegisterUser() {
         className="register-user-content"
         style={{ border: `1px solid ${theme.textColorSecondary}` }}
       >
-        <header className="header-user">
-          <div className="logo">
-            <img src={logo} alt="logo" />
-          </div>
-          <div className="title-user">
-            <h1 style={{ color: theme.textColorSecondary }}>
-              Cadastrar Usuário
-            </h1>
-          </div>
-        </header>
+        <HeaderInitial />
+
         <form onSubmit={handleSubmit(handleSubmitUser)}>
           <TextField errors={errors?.username?.message}>
             <Label htmlFor="username">Nome de Usuário: </Label>
@@ -109,8 +102,17 @@ function RegisterUser() {
               register={register('password')}
             />
           </TextField>
+          <div className="toggle">
+            <ToggleTheme />
+          </div>
 
           <ButtonSubmit>Cadastrar</ButtonSubmit>
+
+          <div className="redirect-login">
+            <p style={{ color: theme.textColor }}>
+              Já tem conta? <a href="/">Entrar</a>
+            </p>
+          </div>
         </form>
       </section>
     </article>

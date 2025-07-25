@@ -12,6 +12,7 @@ import Spendings from './pages/Spendings';
 import RegisterUser from './pages/RegisterUser';
 import NotFound from './pages/NotFound';
 import Account from './pages/Account';
+import ForgotPassword from './pages/ForgotPassword';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="/invoices" element={<Invoices />} />
               <Route path="/savings" element={<Savings />} />
               <Route path="/account" element={<Account />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <ToastContainer autoClose={3000} />

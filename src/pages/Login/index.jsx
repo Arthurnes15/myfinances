@@ -12,7 +12,7 @@ import TextField from '../../components/Common/TextField/index';
 import Label from '../../components/Common/Label';
 import Input from '../../components/Common/Input';
 import ButtonSubmit from '../../components/Common/ButtonSubmit';
-import logo from '../../assets/images/logo.png';
+import HeaderInitial from '../../components/Common/HeaderInitial';
 import ToggleTheme from '../../components/ToggleTheme';
 import './styles.css';
 
@@ -59,14 +59,7 @@ function Login() {
         className="login_content"
         style={{ border: `1px solid ${theme.textColorSecondary}` }}
       >
-        <header className="title">
-          <div className="logo">
-            <img src={logo} alt="logo" />
-          </div>
-          <div className="text">
-            <h1 style={{ color: theme.textColorSecondary }}>MyFinances</h1>
-          </div>
-        </header>
+        <HeaderInitial />
         <form onSubmit={handleSubmit(handleSubmitLogin)}>
           <TextField errors={errors?.email?.message}>
             <Label htmlFor="email">Email: </Label>
@@ -84,6 +77,11 @@ function Login() {
               register={register('password')}
             />
           </TextField>
+          <div className="redirect-forgot">
+            <p style={{ color: theme.textColor }}>
+              <a href="/forgot-password">Esqueci minha senha</a>
+            </p>
+          </div>
 
           <ButtonSubmit>Entrar</ButtonSubmit>
 
@@ -91,7 +89,7 @@ function Login() {
             <ToggleTheme />
           </div>
 
-          <div className="redirect">
+          <div className="redirect-register">
             <p style={{ color: theme.textColor }}>
               Não possui conta? <a href="/register-user">Cadastre-se</a>
             </p>

@@ -1,0 +1,18 @@
+.forgot-password {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.forgot-content {
+  min-width: 30%;
+  padding: 20px;
+  margin-bottom: 50px;
+  border: 1px solid #ffffffc4;
+  border-radius: 8px;
+}
+
+.toggle {
+  padding-top: 10px;
+}

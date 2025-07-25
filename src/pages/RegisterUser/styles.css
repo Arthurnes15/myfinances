@@ -50,6 +50,21 @@
   padding: 8px;
 }
 
+.toggle {
+  padding-top: 10px;
+}
+
+.redirect-login {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 15px 0;
+  color: white;
+}
+
+.redirect-login a {
+  color: #257464;
+}
+
 @media (max-width: 540px) {
   .register-user-content {
     width: 300px;
