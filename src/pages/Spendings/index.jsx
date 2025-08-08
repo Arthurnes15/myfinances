@@ -14,6 +14,7 @@ import Container from '../../components/Common/Container';
 import ModalRegister from '../../components/Modals/ModalsSpendings/RegisterSpending';
 import ModalEdit from '../../components/Modals/ModalsSpendings/EditSpending';
 import SpendingsTable from '../../components/SpendingsTable';
+import PlaceholderHeading from '../../components/Common/PlaceholderHeading';
 import Header from '../../components/Common/Header';
 import Content from '../../components/Common/Content';
 import HeaderMobile from '../../components/Common/HeaderMobile';
@@ -27,7 +28,6 @@ function Spendings() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalEditIsOpen, setEditIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  // TODO: Mudar nome para spendingToBeUpdated
   const [spendingToBeUpdated, setSpendingDataToBeUpdated] = useState({
     id: '',
     item: '',
@@ -140,12 +140,16 @@ function Spendings() {
             />
           </div>
         </div>
-        {filteredSpendings.length > 0 && (
-          <SpendingsTable
-            spendings={filteredSpendings}
-            handleDelete={handleDelete}
-            openEditModal={openEditModal}
-          />
+        {spendings.length === 0 ? (
+          <PlaceholderHeading text="Você ainda não cadastrou nenhum gasto" />
+        ) : (
+          filteredSpendings.length > 0 && (
+            <SpendingsTable
+              spendings={filteredSpendings}
+              handleDelete={handleDelete}
+              openEditModal={openEditModal}
+            />
+          )
         )}
       </Content>
     </Container>

@@ -3,6 +3,7 @@
   justify-content: left;
   align-items: center;
   width: 50vw;
+  padding-top: 40px;
 }
 
 @media (max-width: 540px) {
